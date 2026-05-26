@@ -1,6 +1,7 @@
-import { Moon, Sun, Search } from "lucide-react"
+import { Moon, Sun, Search, TrendingUp } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import { useState } from "react"
+import { getTrendingAll } from "@/services/movieApi"
+import { useState, useEffect, useRef } from "react"
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -10,28 +11,71 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import {
-    useTheme
-} from "@/components/theme-provider.tsx";
+import { useTheme } from "@/components/theme-provider"
 
-interface HeaderProps {
-    onSearch: (keyword: string) => void;
-}
 
-export const Header = ({ onSearch }: HeaderProps) => {
+export const Header = () => {
     const { theme, setTheme } = useTheme()
     const { t, i18n } = useTranslation()
     const [searchKey, setSearchKey] = useState("")
 
+    const [showTrending, setShowTrending] = useState(false)
+    const [trendingList, setTrendingList] = useState<string[]>([])
+
+    const searchContainerRef = useRef<HTMLDivElement>(null)
+
     const toggleLanguage = async () => {
         const newLang = i18n.language === "vi" ? "en" : "vi";
-
         await i18n.changeLanguage(newLang);
     };
 
+    const fetchTrendingSearches = async () => {
+        try {
+            const data = await getTrendingAll("day");
+
+            if (data && data.results) {
+                const parsedResults = data.results
+                        .slice(0, 10)
+                        .map((item: any) => item.title || item.name)
+                        .filter(Boolean);
+
+                setTrendingList(parsedResults);
+            }
+        } catch (error) {
+            console.error("Lỗi khi lấy dữ liệu trending search:", error);
+        }
+    };
+
+    const handleInputFocus = () => {
+        setShowTrending(true);
+        if (trendingList.length === 0) {
+            fetchTrendingSearches();
+        }
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+                setShowTrending(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     const handleSearchSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSearch(searchKey.trim());
+        console.log("Đang tìm kiếm:", searchKey.trim());
+        setShowTrending(false);
+    };
+
+    const handleSelectTrendingItem = (keyword: string) => {
+        setSearchKey(keyword);
+        console.log("Đã chọn gợi ý:", keyword);
+        setShowTrending(false);
     };
 
     return (
@@ -44,26 +88,50 @@ export const Header = ({ onSearch }: HeaderProps) => {
                     </span>
                     </div>
 
-                    <form onSubmit={handleSearchSubmit} className="relative grow max-w-sm mx-4">
-                        <input
-                                type="text"
-                                placeholder={t('nav.search.placeholder')}
-                                value={searchKey}
-                                onChange={(e) => setSearchKey(e.target.value)}
-                                className="w-full h-9 pl-9 pr-4 text-sm bg-zinc-100 dark:bg-zinc-900 border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 text-foreground"
-                        />
-                        <button type="submit" className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
-                            <Search className="w-4 h-4" />
-                        </button>
-                    </form>
+                    <div ref={searchContainerRef} className="relative grow max-w-xl mx-4">
+                        <form onSubmit={handleSearchSubmit} className="relative w-full">
+                            <input
+                                    type="text"
+                                    placeholder={i18n.language === "vi" ? "Tìm kiếm phim, tv show, diễn viên..." : "Search for a movie, tv show, person..."}
+                                    value={searchKey}
+                                    onChange={(e) => setSearchKey(e.target.value)}
+                                    onFocus={handleInputFocus}
+                                    className="w-full h-10 pl-10 pr-4 text-sm bg-zinc-100 dark:bg-zinc-900 border border-border rounded-full focus:outline-none focus:ring-1 focus:ring-indigo-500 text-foreground"
+                            />
+                            <button type="submit" className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                                <Search className="w-5 h-5" />
+                            </button>
+                        </form>
 
-                    {/* 3. Phần Menu điều hướng (Giữ nguyên cấu trúc cũ) */}
+                        {showTrending && trendingList.length > 0 && (
+                                <div className="absolute top-full left-0 w-full mt-2 bg-white dark:bg-zinc-950 border border-border rounded-md shadow-2xl overflow-hidden z-50">
+                                    <div className="flex items-center gap-2 px-4 py-3 bg-zinc-50 dark:bg-zinc-900/50 border-b border-border">
+                                        <TrendingUp className="w-5 h-5 text-foreground font-bold" />
+                                        <span className="font-bold text-base text-foreground tracking-wide">Trending</span>
+                                    </div>
+
+                                    <ul className="max-h-[60vh] overflow-y-auto">
+                                        {trendingList.map((item, index) => (
+                                                <li
+                                                        key={index}
+                                                        onClick={() => handleSelectTrendingItem(item)}
+                                                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer border-b border-border/50 last:border-none transition-colors"
+                                                >
+                                                    <Search className="w-4 h-4 text-muted-foreground shrink-0" />
+                                                    <span className="text-sm text-foreground truncate">{item}</span>
+                                                </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                        )}
+                    </div>
+
                     <NavigationMenu className="hidden lg:flex">
                         <NavigationMenuList className="gap-2">
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger className="bg-transparent">{t('nav.movies')}</NavigationMenuTrigger>
                                 <NavigationMenuContent>
-                                    <ul className="grid w-[220px] gap-1 p-3">
+                                    <ul className="grid w-55 gap-1 p-3">
                                         <li><NavigationMenuLink href="/movies/popular" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.popular')}</NavigationMenuLink></li>
                                         <li><NavigationMenuLink href="/movies/now-playing" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.nowPlaying')}</NavigationMenuLink></li>
                                         <li><NavigationMenuLink href="/movies/upcoming" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.upcoming')}</NavigationMenuLink></li>
@@ -75,7 +143,7 @@ export const Header = ({ onSearch }: HeaderProps) => {
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger className="bg-transparent">{t('nav.tvShows')}</NavigationMenuTrigger>
                                 <NavigationMenuContent>
-                                    <ul className="grid w-[220px] gap-1 p-3">
+                                    <ul className="grid w-55 gap-1 p-3">
                                         <li><NavigationMenuLink href="/tv/popular" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.popular')}</NavigationMenuLink></li>
                                         <li><NavigationMenuLink href="/tv/on-the-air" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.onTheAir')}</NavigationMenuLink></li>
                                         <li><NavigationMenuLink href="/tv/top-rated" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.topRated')}</NavigationMenuLink></li>
@@ -91,7 +159,7 @@ export const Header = ({ onSearch }: HeaderProps) => {
                         </NavigationMenuList>
                     </NavigationMenu>
 
-                    <div className="flex items-center gap-4 flex-shrink-0">
+                    <div className="flex items-center gap-4 shrink-0">
                         <button
                                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                                 className="flex items-center justify-center w-10 h-10 transition-colors border rounded-md text-muted-foreground border-border hover:bg-accent"

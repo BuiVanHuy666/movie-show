@@ -69,3 +69,6 @@ export const getSimilarMovies = (movieId: number, page: number = 1): Promise<TMD
 // Sửa lại endpoint thành /credits cho chuẩn API của TMDB
 export const getMovieCasts = (movieId: number) =>
         fetchTMDB(`/movie/${movieId}/credits`);
+
+export const getTrendingAll = (timeWindow: "day" | "week" = "day"): Promise<TMDBResponse> =>
+        fetchTMDB(`/trending/all/${timeWindow}`);
