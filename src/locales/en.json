@@ -1,0 +1,34 @@
+{
+	"nav": {
+		"search": {
+			"placeholder": "Search for movies, TV shows, actors...",
+			"button": "Search"
+		},
+		"movies": "Movies",
+		"tvShows": "TV Shows",
+		"actors": "Actors",
+		"login": "Login"
+	},
+	"menu": {
+		"popular": "Popular",
+		"nowPlaying": "Now Playing",
+		"upcoming": "Upcoming",
+		"topRated": "Top Rated",
+		"onTheAir": "On The Air"
+	},
+	"trending": {
+		"loading-text": "Loading trending movies and TV shows..."
+	},
+	"footer": {
+		"description": "Comprehensive movie and TV show information platform. Experience the ultimate cinematic space right at your home.",
+		"support": "Support",
+		"terms": "Terms of Use",
+		"privacy": "Privacy Policy",
+		"contact": "Contact System",
+		"rights": "All rights reserved. Developed by Bui Van Huy."
+	},
+	"home": {
+		"whatsPopular": "What's Popular",
+		"inTheaters": "In Theaters"
+	}
+}

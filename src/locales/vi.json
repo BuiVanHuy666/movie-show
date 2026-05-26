@@ -1,0 +1,31 @@
+{
+	"nav": {
+		"search": {
+			"placeholder": "Tìm kiếm phim, TV shows, diễn viên...",
+			"button": "Tìm kiếm"
+		},
+		"movies": "Phim",
+		"tvShows": "TV Shows",
+		"actors": "Diễn viên",
+		"login": "Đăng nhập"
+	},
+	"menu": {
+		"popular": "Nổi bật",
+		"nowPlaying": "Đang chiếu",
+		"upcoming": "Sắp chiếu",
+		"topRated": "Đánh giá cao",
+		"onTheAir": "Đang phát sóng"
+	},
+	"footer": {
+		"description": "Nền tảng cập nhật thông tin phim ảnh và truyền hình toàn diện. Trải nghiệm không gian điện ảnh đỉnh cao ngay tại nhà của bạn.",
+		"support": "Hỗ trợ",
+		"terms": "Điều khoản sử dụng",
+		"privacy": "Chính sách bảo mật",
+		"contact": "Liên hệ hệ thống",
+		"rights": "Tất cả các quyền được bảo lưu. Phát triển bởi Bui Van Huy."
+	},
+	"home": {
+		"whatsPopular": "Phổ biến nhất",
+		"inTheaters": "Tại rạp"
+	}
+}

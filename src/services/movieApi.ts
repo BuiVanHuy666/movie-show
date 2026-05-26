@@ -1,11 +1,17 @@
 import type { TMDBResponse } from "@/types/movie";
+import i18n from "@/i18n";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
 
+const getTMDBLanguage = (): string => {
+    return i18n.language === "vi" ? "vi-VN" : "en-US";
+};
+
 const fetchTMDB = async <T>(endpoint: string, extraParams: string = ""): Promise<T> => {
     try {
-        const url = `${BASE_URL}${endpoint}?api_key=${API_KEY}${extraParams}`;
+        const currentLang = getTMDBLanguage();
+        const url = `${BASE_URL}${endpoint}?api_key=${API_KEY}&language=${currentLang}${extraParams}`;
 
         const response = await fetch(url, {
             method: "GET",
@@ -26,40 +32,40 @@ const fetchTMDB = async <T>(endpoint: string, extraParams: string = ""): Promise
 };
 
 export const getPopularMovies = (page: number = 1): Promise<TMDBResponse> =>
-        fetchTMDB("/movie/popular", `&language=vi-VN&page=${page}`);
+        fetchTMDB("/movie/popular", `&page=${page}`);
 
 export const getTrendingMovies = (timeWindow: "day" | "week" = "day"): Promise<TMDBResponse> =>
-        fetchTMDB(`/trending/movie/${timeWindow}`, "&language=vi-VN");
+        fetchTMDB(`/trending/movie/${timeWindow}`);
 
 export const getNowPlayingMovies = (page: number = 1): Promise<TMDBResponse> =>
-        fetchTMDB("/movie/now_playing", `&language=vi-VN&page=${page}`);
+        fetchTMDB("/movie/now_playing", `&page=${page}`);
 
 export const getUpcomingMovies = (page: number = 1): Promise<TMDBResponse> =>
-        fetchTMDB("/movie/upcoming", `&language=vi-VN&page=${page}`);
+        fetchTMDB("/movie/upcoming", `&page=${page}`);
 
 export const getTopRatedMovies = (page: number = 1): Promise<TMDBResponse> =>
-        fetchTMDB("/movie/top_rated", `&language=vi-VN&page=${page}`);
+        fetchTMDB("/movie/top_rated", `&page=${page}`);
 
 export const searchMovies = (keyword: string, page: number = 1): Promise<TMDBResponse> =>
-        fetchTMDB("/search/movie", `&query=${encodeURIComponent(keyword)}&include_adult=false&language=vi-VN&page=${page}`);
+        fetchTMDB("/search/movie", `&query=${encodeURIComponent(keyword)}&include_adult=false&page=${page}`);
 
 // --- THỂ LOẠI (GENRES) ---
-export const getMovieGenres = () => fetchTMDB("/genre/movie/list", "&language=vi-VN");
-export const getTvGenres = () => fetchTMDB("/genre/tv/list", "&language=vi-VN");
+export const getMovieGenres = () => fetchTMDB("/genre/movie/list");
+export const getTvGenres = () => fetchTMDB("/genre/tv/list");
 
 export const getMoviesByGenre = (genreId: number, page: number = 1): Promise<TMDBResponse> =>
-        fetchTMDB("/discover/movie", `&with_genres=${genreId}&language=vi-VN&page=${page}`);
+        fetchTMDB("/discover/movie", `&with_genres=${genreId}&page=${page}`);
 
 // --- CHI TIẾT PHIM (DETAILS) ---
 export const getMovieDetails = (movieId: number) =>
-        fetchTMDB(`/movie/${movieId}`, "&append_to_response=videos&language=vi-VN");
+        fetchTMDB(`/movie/${movieId}`, "&append_to_response=videos");
 
 export const getMovieReviews = (movieId: number) =>
-        fetchTMDB(`/movie/${movieId}/reviews`, "&language=en-US"); // Review đa phần bằng tiếng Anh
+        fetchTMDB(`/movie/${movieId}/reviews`);
 
 export const getSimilarMovies = (movieId: number, page: number = 1): Promise<TMDBResponse> =>
-        fetchTMDB(`/movie/${movieId}/similar`, `&language=vi-VN&page=${page}`);
+        fetchTMDB(`/movie/${movieId}/similar`, `&page=${page}`);
 
 // Sửa lại endpoint thành /credits cho chuẩn API của TMDB
 export const getMovieCasts = (movieId: number) =>
-        fetchTMDB(`/movie/${movieId}/credits`, "&language=vi-VN");
+        fetchTMDB(`/movie/${movieId}/credits`);

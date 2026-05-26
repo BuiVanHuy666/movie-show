@@ -2,6 +2,12 @@ import { Header } from "@/components/layouts/Header"
 import {
     TrendingSection
 } from "@/components/movies/TrendingSection.tsx";
+import {
+    Footer
+} from "@/components/layouts/Footer.tsx";
+import {
+    PouplarInTheatersSection
+} from "@/components/movies/PouplarInTheatersSection.tsx";
 
 function App() {
     return (
@@ -9,7 +15,10 @@ function App() {
                 <Header />
                 <main className="container px-4 mx-auto mt-6">
                     <TrendingSection />
+                    <PouplarInTheatersSection/>
                 </main>
+
+                <Footer/>
             </div>
     )
 }
