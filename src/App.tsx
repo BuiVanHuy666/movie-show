@@ -1,25 +1,15 @@
-import { Header } from "@/components/layouts/Header"
-import {
-    TrendingSection
-} from "@/components/movies/TrendingSection.tsx";
-import {
-    Footer
-} from "@/components/layouts/Footer.tsx";
-import {
-    PouplarInTheatersSection
-} from "@/components/movies/PouplarInTheatersSection.tsx";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Home } from "@/pages/Home";
+import { MovieDetail } from "@/pages/MovieDetail";
 
 function App() {
     return (
-            <div className="min-h-screen bg-background text-foreground">
-                <Header />
-                <main className="container px-4 mx-auto mt-6">
-                    <TrendingSection />
-                    <PouplarInTheatersSection/>
-                </main>
-
-                <Footer/>
-            </div>
+        <Router>
+            <Routes>
+                <Route path="/movie-show/" element={<Home />} />
+                <Route path="/movie-show/movie/:movieId" element={<MovieDetail />} />
+            </Routes>
+        </Router>
     )
 }
 

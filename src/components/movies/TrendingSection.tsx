@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getTrendingMovies } from "@/services/movieApi";
 import type {
     Movie
@@ -9,6 +10,7 @@ import {
 
 export const TrendingSection = () => {
     const { i18n } = useTranslation();
+    const navigate = useNavigate();
     const [movies, setMovies] = useState<Movie[]>([]);
     const [timeWindow, setTimeWindow] = useState<"day" | "week">("day");
     const [isLoading, setIsLoading] = useState(true);
@@ -64,12 +66,12 @@ export const TrendingSection = () => {
                     </div>
                 </div>
 
-                <div className="flex gap-5 overflow-x-auto pb-6 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <div className="flex gap-5 overflow-x-auto pb-6 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none">
                     {isLoading ? (
                             <p className="text-muted-foreground animate-pulse">Đang tải danh sách Trending...</p>
                     ) : (
                             movies.map((movie) => (
-                                    <div key={movie.id} className="shrink-0 w-40 group cursor-pointer">
+                                    <div key={movie.id} className="shrink-0 w-40 group cursor-pointer" onClick={() => navigate(`/movie-show/movie/${movie.id}`)}>
 
                                         <div className="overflow-hidden rounded-xl aspect-2/3 mb-3 shadow-md">
                                             <img

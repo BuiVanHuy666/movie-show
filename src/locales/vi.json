@@ -27,5 +27,32 @@
 	"home": {
 		"whatsPopular": "Phổ biến nhất",
 		"inTheaters": "Tại rạp"
+	},
+	"movieDetails": {
+		"originalTitle": "Tên gốc",
+		"status": "Trạng thái",
+		"originalLanguage": "Ngôn ngữ gốc",
+		"budget": "Kinh phí",
+		"revenue": "Doanh thu",
+		"keywords": "Từ khóa",
+		"noKeywords": "Không có từ khóa",
+		"overview": "Nội dung",
+		"topBilledCast": "Diễn viên chính",
+		"reviews": "Đánh giá",
+		"similarMovies": "Phim tương tự...",
+		"playTrailer": "Xem Trailer",
+		"userScore": "Điểm",
+		"noInfo": "Chưa cập nhật",
+		"watchOnYoutube": "Xem trên YouTube",
+		"back": "Quay lại",
+		"loadingData": "Đang tải dữ liệu phim...",
+		"notFound": "Không tìm thấy thông tin phim.",
+		"genres": "Thể loại",
+		"runtime": "Thời lượng",
+		"releaseDate": "Ngày phát hành",
+		"noImage": "Không có ảnh",
+		"reviewBy": "Đánh giá từ",
+		"notApplicable": "N/A",
+		"ifYouLiked": "Nếu bạn thích"
 	}
 }

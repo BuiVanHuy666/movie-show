@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/navigation-menu"
 import { useTheme } from "@/components/theme-provider"
 
-
 export const Header = () => {
     const { theme, setTheme } = useTheme()
     const { t, i18n } = useTranslation()

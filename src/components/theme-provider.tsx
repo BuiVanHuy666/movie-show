@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
 
-// 1. Chỉ còn 2 kiểu giao diện thực tế
+
 type Theme = "dark" | "light"
 
 type ThemeProviderProps = {

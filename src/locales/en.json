@@ -30,5 +30,32 @@
 	"home": {
 		"whatsPopular": "What's Popular",
 		"inTheaters": "In Theaters"
+	},
+	"movieDetails": {
+		"originalTitle": "Original Title",
+		"status": "Status",
+		"originalLanguage": "Original Language",
+		"budget": "Budget",
+		"revenue": "Revenue",
+		"keywords": "Keywords",
+		"noKeywords": "No keywords",
+		"overview": "Overview",
+		"topBilledCast": "Top Billed Cast",
+		"reviews": "Reviews",
+		"similarMovies": "Similar Movies...",
+		"playTrailer": "Play Trailer",
+		"userScore": "Score",
+		"noInfo": "Not available",
+		"watchOnYoutube": "Watch on YouTube",
+		"ifYouLiked": "If you liked",
+		"back": "Back",
+		"loadingData": "Loading movie data...",
+		"notFound": "Movie information not found.",
+		"genres": "Genres",
+		"runtime": "Runtime",
+		"releaseDate": "Release Date",
+		"noImage": "No Image",
+		"reviewBy": "A review by",
+		"notApplicable": "N/A"
 	}
 }
