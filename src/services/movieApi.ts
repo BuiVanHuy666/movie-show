@@ -1,5 +1,5 @@
 import type { TMDBResponse } from "@/types/movie";
-import i18n from "@/i18n";
+import i18n from "@/lib/i18n.ts";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;

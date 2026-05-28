@@ -57,5 +57,25 @@
 		"noImage": "No Image",
 		"reviewBy": "A review by",
 		"notApplicable": "N/A"
+	},
+	"error": {
+		"goBack": "Go Back",
+		"goHome": "Go to Homepage",
+		"404": {
+			"title": "Page Not Found",
+			"desc": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+		},
+		"403": {
+			"title": "Access Denied",
+			"desc": "You do not have permission to access this area. Please log in with a valid account."
+		},
+		"500": {
+			"title": "System Overload",
+			"desc": "A critical system error has occurred. Our technical team has been notified and is working on it."
+		},
+		"system": {
+			"title": "System Error",
+			"desc": "An error occurred during navigation."
+		}
 	}
 }

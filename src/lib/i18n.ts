@@ -5,9 +5,9 @@ import {
 } from 'react-i18next';
 
 import vi
-    from './locales/vi.json';
+    from '../locales/vi.json';
 import en
-    from './locales/en.json';
+    from '../locales/en.json';
 
 const browserLanguage = navigator.language.startsWith('vi') ? 'vi' : 'en';
 

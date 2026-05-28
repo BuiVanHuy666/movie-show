@@ -1,6 +1,6 @@
 import { Moon, Sun, Search, TrendingUp } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import { getTrendingAll } from "@/services/movieApi"
+import { getTrendingAll } from "@/services/movieApi.ts"
 import { useState, useEffect, useRef } from "react"
 import {
     NavigationMenu,
@@ -10,8 +10,8 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
-import { useTheme } from "@/components/theme-provider"
+} from "@/components/ui/navigation-menu.tsx"
+import { useTheme } from "@/app/providers/theme-provider.tsx"
 
 export const Header = () => {
     const { theme, setTheme } = useTheme()

@@ -1,16 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Home } from "@/pages/Home";
-import { MovieDetail } from "@/pages/MovieDetail";
+import { RouterProvider } from "react-router-dom";
+import { AppRoute } from "@/app/routes/AppRoute.tsx";
 
 function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/movie-show/" element={<Home />} />
-                <Route path="/movie-show/movie/:movieId" element={<MovieDetail />} />
-            </Routes>
-        </Router>
-    )
+	return <RouterProvider router={AppRoute}/>
 }
 
 export default App

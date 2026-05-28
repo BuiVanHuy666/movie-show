@@ -44,6 +44,7 @@
 		"userScore": "Điểm",
 		"noInfo": "Chưa cập nhật",
 		"watchOnYoutube": "Xem trên YouTube",
+		"ifYouLiked": "Nếu bạn thích",
 		"back": "Quay lại",
 		"loadingData": "Đang tải dữ liệu phim...",
 		"notFound": "Không tìm thấy thông tin phim.",
@@ -52,7 +53,26 @@
 		"releaseDate": "Ngày phát hành",
 		"noImage": "Không có ảnh",
 		"reviewBy": "Đánh giá từ",
-		"notApplicable": "N/A",
-		"ifYouLiked": "Nếu bạn thích"
+		"notApplicable": "N/A"
+	},
+	"error": {
+		"goBack": "Quay lại",
+		"goHome": "Về trang chủ",
+		"404": {
+			"title": "Không tìm thấy trang",
+			"desc": "Trang bạn đang tìm kiếm có thể đã bị xóa, đổi tên hoặc tạm thời không thể truy cập."
+		},
+		"403": {
+			"title": "Truy cập bị từ chối",
+			"desc": "Bạn không có quyền truy cập vào khu vực này. Vui lòng đăng nhập bằng tài khoản hợp lệ."
+		},
+		"500": {
+			"title": "Hệ thống quá tải",
+			"desc": "Đã xảy ra lỗi hệ thống nghiêm trọng. Đội ngũ kỹ thuật đã được thông báo và đang xử lý."
+		},
+		"system": {
+			"title": "Lỗi hệ thống",
+			"desc": "Đã xảy ra lỗi trong quá trình điều hướng."
+		}
 	}
 }
