@@ -26,7 +26,9 @@
 	},
 	"home": {
 		"whatsPopular": "Phổ biến nhất",
-		"inTheaters": "Tại rạp"
+		"inTheaters": "Tại rạp",
+		"welcome": "Xin chào.",
+		"exploreText": "Hàng triệu bộ phim, chương trình truyền hình và nhân vật để khám phá. Khám phá ngay."
 	},
 	"movieDetails": {
 		"originalTitle": "Tên gốc",
@@ -74,5 +76,22 @@
 			"title": "Lỗi hệ thống",
 			"desc": "Đã xảy ra lỗi trong quá trình điều hướng."
 		}
+	},
+	"search": {
+		"title": "Kết quả tìm kiếm",
+		"sidebar": {
+			"movie": "Phim",
+			"tv": "Shows Truyền Hình",
+			"person": "Diễn viên",
+			"hint": "Dùng bộ lọc bên trái để thu hẹp kết quả tìm kiếm của bạn."
+		},
+		"results": {
+			"acting_in": "Tham gia trong",
+			"known_for": "Được biết đến qua"
+		}
+	},
+	"pagination": {
+		"previous": "Trang trước",
+		"next": "Trang sau"
 	}
 }

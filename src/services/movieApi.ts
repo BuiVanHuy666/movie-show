@@ -53,6 +53,7 @@ export const searchMovies = (keyword: string, page: number = 1): Promise<TMDBRes
 		fetchTMDB("/search/movie", `&query=${encodeURIComponent(keyword)}&include_adult=false&page=${page}`);
 
 export const getMovieGenres = () => fetchTMDB("/genre/movie/list");
+
 export const getTvGenres = () => fetchTMDB("/genre/tv/list");
 
 export const getMoviesByGenre = (genreId: number, page: number = 1): Promise<TMDBResponse> =>
@@ -70,5 +71,5 @@ export const getSimilarMovies = (movieId: number, page: number = 1): Promise<TMD
 export const getMovieCasts = (movieId: number) =>
 		fetchTMDB(`/movie/${movieId}/credits`);
 
-export const getTrendingAll = (timeWindow: "day" | "week" = "day"): Promise<TMDBResponse> =>
+export const getTrendingKeywords = (timeWindow: "day" | "week" = "day"): Promise<TMDBResponse> =>
 		fetchTMDB(`/trending/all/${timeWindow}`);

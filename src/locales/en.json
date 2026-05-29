@@ -29,7 +29,9 @@
 	},
 	"home": {
 		"whatsPopular": "What's Popular",
-		"inTheaters": "In Theaters"
+		"inTheaters": "In Theaters",
+		"welcome": "Welcome.",
+		"exploreText": "Millions of movies, TV shows and people to discover. Explore now."
 	},
 	"movieDetails": {
 		"originalTitle": "Original Title",
@@ -77,5 +79,22 @@
 			"title": "System Error",
 			"desc": "An error occurred during navigation."
 		}
+	},
+	"search": {
+		"title": "Search Results",
+		"sidebar": {
+			"movie": "Movies",
+			"tv": "TV Shows",
+			"person": "Actors",
+			"hint": "Use the filters on the left to narrow down your search results."
+		},
+		"results": {
+			"acting_in": "Acting in",
+			"known_for": "Known for"
+		}
+	},
+	"pagination": {
+		"previous": "Previous",
+		"next": "Next"
 	}
 }

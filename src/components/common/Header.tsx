@@ -1,6 +1,6 @@
 import { Moon, Sun, Search, TrendingUp } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import { getTrendingAll } from "@/services/movieApi.ts"
+import { getTrendingKeywords } from "@/services/movieApi.ts"
 import { useState, useEffect, useRef } from "react"
 import {
     NavigationMenu,
@@ -12,6 +12,8 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu.tsx"
 import { useTheme } from "@/app/providers/theme-provider.tsx"
+import { Link } from "react-router-dom";
+import { PATHS } from "@/app/routes/routes.ts";
 
 export const Header = () => {
     const { theme, setTheme } = useTheme()
@@ -30,7 +32,7 @@ export const Header = () => {
 
     const fetchTrendingSearches = async () => {
         try {
-            const data = await getTrendingAll("day");
+            const data = await getTrendingKeywords();
 
             if (data && data.results) {
                 const parsedResults = data.results
@@ -82,9 +84,9 @@ export const Header = () => {
                 <div className="container flex h-16 items-center justify-between px-4 mx-auto gap-4">
 
                     <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-400 bg-clip-text text-transparent">
+                    <Link to={PATHS.HOME} className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-400 bg-clip-text text-transparent">
                         MovieShow
-                    </span>
+                    </Link>
                     </div>
 
                     <div ref={searchContainerRef} className="relative grow max-w-xl mx-4">

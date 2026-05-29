@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { ClientLayout } from "@/layouts/ClientLayout.tsx";
 import { PATHS } from "@/app/routes/routes.ts";
-import { Home } from "@/pages/Home.tsx";
+import { HomePage } from "@/pages/HomePage.tsx";
 import { RootErrorBoundary } from "@/app/routes/RootErrorBoundary.tsx";
 import { DetailLayout } from "@/layouts/DetailLayout.tsx";
 import { MovieDetail } from "@/pages/MovieDetail.tsx";
+import { SearchPage } from "@/pages/SearchPage.tsx";
 
 export const AppRoute = createBrowserRouter([
 	{
@@ -13,7 +14,11 @@ export const AppRoute = createBrowserRouter([
 		children: [
 			{
 				path: PATHS.HOME,
-				element: <Home/>
+				element: <HomePage/>
+			},
+			{
+				path: PATHS.SEARCH_PATH,
+				element: <SearchPage/>
 			}
 		]
 	},

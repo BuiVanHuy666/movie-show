@@ -7,4 +7,7 @@ export const PATHS = {
 		DETAIL_PATH: '/movie-show/movie/:movieId',
 		DETAIL: (id: string | number) => `/movie-show/movie/${id}`,
 	},
+
+	SEARCH_PATH: '/movie-show/search',
+	SEARCH: (keyword: string | number) => `/movie-show/search?query=${encodeURIComponent(keyword)}`,
 }
