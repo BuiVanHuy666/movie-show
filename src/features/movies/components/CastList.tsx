@@ -1,8 +1,12 @@
 import type { Cast } from "@/types/movie.ts";
 import { useTranslation } from "react-i18next";
 import { UserCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { PATHS } from "@/app/routes/routes.ts";
 
-export const CastList = ({casts}: { casts: Cast[] }) =>
+export const CastList = ({casts}: {
+	casts: Cast[]
+}) =>
 	{
 		const {t} = useTranslation();
 
@@ -15,7 +19,8 @@ export const CastList = ({casts}: { casts: Cast[] }) =>
 					</h3>
 					<div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar select-none">
 						{casts.map((actor) => (
-								<div
+								<Link
+										to={PATHS.ACTORS.DETAIL(actor.id)}
 										key={actor.id}
 										className="min-w-35 w-35 shrink-0 bg-card rounded-lg overflow-hidden border border-border shadow-sm transition-transform hover:bg-accent text-card-foreground cursor-pointer"
 								>
@@ -35,7 +40,7 @@ export const CastList = ({casts}: { casts: Cast[] }) =>
 										<p className="font-bold text-[15px] leading-tight mb-1 truncate">{actor.name}</p>
 										<p className="text-xs text-muted-foreground leading-snug truncate">{actor.character}</p>
 									</div>
-								</div>
+								</Link>
 						))}
 					</div>
 				</div>

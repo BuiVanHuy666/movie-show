@@ -14,7 +14,8 @@ const fetchTMDB = async <T>(endpoint: string, extraParams: string = "", customLa
 
 		const langQuery = lang ? `&language=${lang}` : "";
 
-		const url = `${BASE_URL}${endpoint}?api_key=${API_KEY}${langQuery}${extraParams}`;
+		const url = `${BASE_URL}${endpoint}?api_key=${API_KEY}${extraParams}${langQuery}`;
+		console.log(url)
 
 		const response = await fetch(url, {
 			method: "GET",
@@ -59,8 +60,11 @@ export const getTvGenres = () => fetchTMDB("/genre/tv/list");
 export const getMoviesByGenre = (genreId: number, page: number = 1): Promise<TMDBResponse> =>
 		fetchTMDB("/discover/movie", `&with_genres=${genreId}&page=${page}`);
 
-export const getMovieDetails = (movieId: number) =>
-		fetchTMDB(`/movie/${movieId}`, "&append_to_response=videos,keywords");
+export const getDetails = (
+	type: "person" | "movie" | "tv" = "movie",
+	id: number,
+	params: string = ""
+) => fetchTMDB(`/${type}/${id}`, params);
 
 export const getMovieReviews = (movieId: number) =>
 		fetchTMDB(`/movie/${movieId}/reviews`, "", "en-US");

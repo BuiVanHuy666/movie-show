@@ -93,5 +93,41 @@
 	"pagination": {
 		"previous": "Trang trước",
 		"next": "Trang sau"
-	}
+	},
+	"actorDetails": {
+		"biography": "Tiểu sử",
+		"knownFor": "Được biết đến qua",
+		"personalInfo": "Thông tin cá nhân",
+		"gender": "Giới tính",
+		"birthday": "Ngày sinh",
+		"placeOfBirth": "Nơi sinh",
+		"alsoKnownAs": "Các tên gọi khác",
+		"acting": "Diễn xuất",
+		"male": "Nam",
+		"female": "Nữ",
+		"notSpecified": "Chưa xác định",
+		"knownCredits": "Số phim tham gia",
+		"noBiography": "Chúng tôi chưa có tiểu sử nào cho diễn viên này.",
+		"yearsOld": "{{age}} tuổi",
+		"passedAway": "hưởng dương {{age}} tuổi",
+		"deathday": "Ngày mất"
+	},
+	"tvDetails": {
+		"seriesCast": "Diễn viên trong series",
+		"seasons": "Các mùa phim",
+		"episodesCount": "{{count}} Tập",
+		"seasonNumber": "Mùa {{num}}",
+		"type": "Loại chương trình",
+		"networks": "Kênh phát sóng",
+		"totalSeasons": "Tổng số mùa",
+		"totalEpisodes": "Tổng số tập",
+		"similarShows": "Chương trình tương tự",
+		"keywords": "Từ khóa",
+		"recommendations": "Có thể bạn sẽ thích",
+		"playTrailer": "Xem Trailer",
+		"contentRating": "Phân loại",
+		"noKeywords": "Chưa có từ khóa"
+	},
+	"showMore": "Xem thêm",
+	"showLess": "Thu gọn"
 }

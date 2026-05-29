@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
 	getMovieCasts,
-	getMovieDetails,
+	getDetails,
 	getMovieReviews,
 	getSimilarMovies
 } from "@/services/movieApi.ts";
@@ -42,7 +42,7 @@ export const useMovieDetail = (movieId: string | undefined, lang: string): Movie
 			const id = parseInt(movieId, 10);
 
 			const [detailsRes, castsRes, similarRes, reviewsRes] = await Promise.allSettled([
-				getMovieDetails(id),
+				getDetails('movie', id, '&append_to_response=videos,keywords'),
 				getMovieCasts(id),
 				getSimilarMovies(id),
 				getMovieReviews(id),

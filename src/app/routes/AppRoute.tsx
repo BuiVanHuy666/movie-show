@@ -6,6 +6,8 @@ import { RootErrorBoundary } from "@/app/routes/RootErrorBoundary.tsx";
 import { DetailLayout } from "@/layouts/DetailLayout.tsx";
 import { MovieDetail } from "@/pages/MovieDetail.tsx";
 import { SearchPage } from "@/pages/SearchPage.tsx";
+import { ActorDetailPage } from "@/pages/ActorDetailPage.tsx";
+import { TVShowsDetailPage } from "@/pages/TVShowsDetailPage.tsx";
 
 export const AppRoute = createBrowserRouter([
 	{
@@ -29,6 +31,14 @@ export const AppRoute = createBrowserRouter([
 			{
 				path: PATHS.MOVIES.DETAIL_PATH,
 				element: <MovieDetail/>
+			},
+			{
+				path: PATHS.ACTORS.DETAIL_PATH,
+				element: <ActorDetailPage/>
+			},
+			{
+				path: PATHS.TV.DETAIL_PATH,
+				element: <TVShowsDetailPage/>
 			}
 		]
 	}

@@ -96,5 +96,41 @@
 	"pagination": {
 		"previous": "Previous",
 		"next": "Next"
-	}
+	},
+	"actorDetails": {
+		"biography": "Biography",
+		"knownFor": "Known For",
+		"personalInfo": "Personal Info",
+		"gender": "Gender",
+		"birthday": "Birthday",
+		"placeOfBirth": "Place of Birth",
+		"alsoKnownAs": "Also Known As",
+		"acting": "Acting",
+		"male": "Male",
+		"female": "Female",
+		"notSpecified": "Not Specified",
+		"knownCredits": "Known Credits",
+		"noBiography": "We don't have a biography for this actor.",
+		"yearsOld": "{{age}} years old",
+		"passedAway": "{{age}} years old",
+		"deathday": "Day of Death"
+	},
+	"tvDetails": {
+		"seriesCast": "Series Cast",
+		"seasons": "Seasons",
+		"episodesCount": "{{count}} Episodes",
+		"seasonNumber": "Season {{num}}",
+		"type": "Show Type",
+		"networks": "Networks",
+		"totalSeasons": "Total Seasons",
+		"totalEpisodes": "Total Episodes",
+		"similarShows": "Similar TV Shows",
+		"keywords": "Keywords",
+		"recommendations": "Recommendations",
+		"playTrailer": "Play Trailer",
+		"contentRating": "Rating",
+		"noKeywords": "No keywords added"
+	},
+	"showMore": "Show More",
+	"showLess": "Show Less"
 }
