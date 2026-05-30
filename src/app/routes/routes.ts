@@ -2,8 +2,10 @@ export const PATHS = {
 	HOME: '/movie-show/',
 
 	MOVIES: {
-		POPULAR: '/movie-show/movies/popular',
+		POPULAR: '/movie-show/movies',
 		NOW_PLAYING: '/movie-show/movies/now-playing',
+		UP_COMING: '/movie-show/movies/upcoming',
+		TOP_RATED: '/movie-show/movies/top-rated',
 		DETAIL_PATH: '/movie-show/movie/:movieId',
 		DETAIL: (id: string | number) => `/movie-show/movie/${id}`,
 	},
@@ -14,6 +16,9 @@ export const PATHS = {
 	},
 
 	TV: {
+		POPULAR: '/movie-show/tv',
+		ON_THE_AIR: '/movie-show/tv/on-the-air',
+		TOP_RATED: '/movie-show/tv/top-rated',
 		DETAIL_PATH: '/movie-show/tv/:tvId',
 		DETAIL: (id: string | number) => `/movie-show/tv/${id}`,
 	},

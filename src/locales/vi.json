@@ -128,6 +128,20 @@
 		"contentRating": "Phân loại",
 		"noKeywords": "Chưa có từ khóa"
 	},
+	"movieFilter": {
+		"title": "Bộ lọc",
+		"releaseDates": "Ngày phát hành",
+		"searchAllReleases": "Tìm kiếm tất cả các bản phát hành?",
+		"from": "Từ",
+		"to": "Đến",
+		"genres": "Thể loại",
+		"language": "Ngôn ngữ",
+		"noneSelected": "Chưa chọn ngôn ngữ",
+		"userScore": "Điểm người dùng",
+		"minUserVotes": "Số lượt bình chọn tối thiểu",
+		"runtime": "Thời lượng (phút)",
+		"search": "Tìm kiếm"
+	},
 	"showMore": "Xem thêm",
 	"showLess": "Thu gọn"
 }

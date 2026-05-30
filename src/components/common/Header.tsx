@@ -1,6 +1,5 @@
 import { Moon, Sun, Search, TrendingUp } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import { getTrendingKeywords } from "@/services/movieApi.ts"
 import { useState, useEffect, useRef } from "react"
 import {
     NavigationMenu,
@@ -14,6 +13,7 @@ import {
 import { useTheme } from "@/app/providers/theme-provider.tsx"
 import { Link } from "react-router-dom";
 import { PATHS } from "@/app/routes/routes.ts";
+import { SearchService } from "@/services/mediaService.ts";
 
 export const Header = () => {
     const { theme, setTheme } = useTheme()
@@ -32,7 +32,7 @@ export const Header = () => {
 
     const fetchTrendingSearches = async () => {
         try {
-            const data = await getTrendingKeywords();
+            const data = await SearchService.getTrendingKeywords();
 
             if (data && data.results) {
                 const parsedResults = data.results
@@ -133,10 +133,10 @@ export const Header = () => {
                                 <NavigationMenuTrigger className="bg-transparent">{t('nav.movies')}</NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <ul className="grid w-55 gap-1 p-3">
-                                        <li><NavigationMenuLink href="/movies/popular" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.popular')}</NavigationMenuLink></li>
-                                        <li><NavigationMenuLink href="/movies/now-playing" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.nowPlaying')}</NavigationMenuLink></li>
-                                        <li><NavigationMenuLink href="/movies/upcoming" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.upcoming')}</NavigationMenuLink></li>
-                                        <li><NavigationMenuLink href="/movies/top-rated" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.topRated')}</NavigationMenuLink></li>
+                                        <Link to={PATHS.MOVIES.POPULAR}><NavigationMenuLink className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.popular')}</NavigationMenuLink></Link>
+                                        <Link to={PATHS.MOVIES.NOW_PLAYING}><NavigationMenuLink className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.nowPlaying')}</NavigationMenuLink></Link>
+                                        <Link to={PATHS.MOVIES.UP_COMING}><NavigationMenuLink className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.upcoming')}</NavigationMenuLink></Link>
+                                        <Link to={PATHS.MOVIES.TOP_RATED}><NavigationMenuLink className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.topRated')}</NavigationMenuLink></Link>
                                     </ul>
                                 </NavigationMenuContent>
                             </NavigationMenuItem>

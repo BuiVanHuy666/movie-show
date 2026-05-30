@@ -131,6 +131,20 @@
 		"contentRating": "Rating",
 		"noKeywords": "No keywords added"
 	},
+	"movieFilter": {
+		"title": "Filters",
+		"releaseDates": "Release Dates",
+		"searchAllReleases": "Search all releases?",
+		"from": "from",
+		"to": "to",
+		"genres": "Genres",
+		"language": "Language",
+		"noneSelected": "None Selected",
+		"userScore": "User Score",
+		"minUserVotes": "Minimum User Votes",
+		"runtime": "Runtime",
+		"search": "Search"
+	},
 	"showMore": "Show More",
 	"showLess": "Show Less"
 }

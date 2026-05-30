@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-	getMovieCasts,
-	getDetails,
-	getMovieReviews,
-	getSimilarMovies
-} from "@/services/movieApi.ts";
 import type { Cast, MovieDetails, Review, SimilarMovie } from "@/types/movie.ts";
+import { MovieService } from "@/services/mediaService.ts";
 
 interface MovieDetailState {
 	movie: MovieDetails | null;
@@ -42,10 +37,10 @@ export const useMovieDetail = (movieId: string | undefined, lang: string): Movie
 			const id = parseInt(movieId, 10);
 
 			const [detailsRes, castsRes, similarRes, reviewsRes] = await Promise.allSettled([
-				getDetails('movie', id, '&append_to_response=videos,keywords'),
-				getMovieCasts(id),
-				getSimilarMovies(id),
-				getMovieReviews(id),
+				MovieService.getDetails(id, '&append_to_response=videos,keywords'),
+				MovieService.getCasts(id),
+				MovieService.getSimilar(id),
+				MovieService.getReviews(id),
 			]);
 
 			if (cancelled) return;

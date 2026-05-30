@@ -9,7 +9,7 @@ import { ReviewsList } from "@/features/movies/components/ReviewList.tsx";
 import { CastList } from "@/features/movies/components/CastList.tsx";
 import { SimilarMoviesList } from "@/features/movies/components/SimilarMovieList.tsx";
 
-export const MovieDetail = () =>
+export const MovieDetailPage = () =>
 	{
 		const {movieId} = useParams<{
 			movieId: string

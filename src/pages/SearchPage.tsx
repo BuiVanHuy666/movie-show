@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +15,7 @@ import {
 	PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Search, Info, Image as ImageIcon, User as UserIcon } from "lucide-react";
+import { PATHS } from "@/app/routes/routes";
 
 type SearchType = "movie" | "tv" | "person";
 
@@ -69,7 +70,6 @@ export const SearchPage = () => {
 			} catch (error) {
 				console.error("Lỗi fetch dữ liệu tìm kiếm:", error);
 			} finally {
-				// Tối ưu hiệu ứng Skeleton: Đợi thêm 300ms để người dùng kịp thấy độ mượt
 				setTimeout(() => setIsLoading(false), 300);
 			}
 		};
@@ -91,7 +91,6 @@ export const SearchPage = () => {
 		{ key: "person", label: "search.sidebar.person", count: counts.person },
 	];
 
-	// Component Skeleton Khung xương đẹp mắt của Shadcn
 	const SearchSkeleton = () => (
 			<div className="space-y-4">
 				{[1, 2, 3, 4, 5].map((i) => (
@@ -112,7 +111,6 @@ export const SearchPage = () => {
 
 	return (
 			<div className="min-h-screen bg-background text-foreground pb-12">
-				{/* THANH TÌM KIẾM PHỤ */}
 				<div className="border-b bg-card sticky top-[64px] z-40 shadow-sm">
 					<div className="container mx-auto px-4 py-2">
 						<form onSubmit={handleSearchSubmit} className="relative max-w-5xl mx-auto flex items-center">
@@ -130,7 +128,7 @@ export const SearchPage = () => {
 				<div className="container mx-auto px-4 py-8">
 					<div className="flex flex-col md:flex-row gap-8 items-start">
 
-						<div className="w-full md:w-64 shrink-0 flex flex-col gap-4 sticky top-[150px]">
+						<div className="w-full md:w-64 shrink-0 flex flex-col gap-4 sticky top-37.5">
 							<Card className="rounded-xl overflow-hidden border-border shadow-sm p-0">
 								<div className="bg-sky-500 p-4 text-white font-bold text-lg">
 									{t("search.title")}
@@ -183,20 +181,29 @@ export const SearchPage = () => {
 													? item.known_for.map((k: any) => k.title || k.name).join(", ")
 													: "";
 
+											const detailUrl =
+													activeTab === "movie" ? PATHS.MOVIES.DETAIL(item.id) :
+															activeTab === "tv" ? PATHS.TV.DETAIL(item.id) :
+																	PATHS.ACTORS.DETAIL(item.id);
+
 											return (
 													<Card key={item.id} className="flex flex-row overflow-hidden hover:shadow-md hover:border-sky-500/50 transition-all duration-300 border-border group">
-														<div className="w-[90px] h-[135px] shrink-0 bg-muted flex items-center justify-center overflow-hidden">
+														{/* Bọc Link cho Poster */}
+														<Link to={detailUrl} className="w-22.5 h-33.75 shrink-0 bg-muted flex items-center justify-center overflow-hidden block">
 															{imageUrl ? (
 																	<img src={imageUrl} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
 															) : (
 																	isPerson ? <UserIcon className="w-8 h-8 text-muted-foreground/50" /> : <ImageIcon className="w-8 h-8 text-muted-foreground/50" />
 															)}
-														</div>
+														</Link>
 
 														<div className="flex-1 p-4 flex flex-col justify-center min-w-0">
-															<h3 className="font-bold text-lg cursor-pointer transition-colors truncate group-hover:text-sky-500">
-																{title}
-															</h3>
+															{/* Bọc Link cho Tiêu đề */}
+															<Link to={detailUrl} className="w-fit">
+																<h3 className="font-bold text-lg cursor-pointer transition-colors truncate group-hover:text-sky-500">
+																	{title}
+																</h3>
+															</Link>
 
 															{isPerson ? (
 																	<div className="text-sm mt-1">

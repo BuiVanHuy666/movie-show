@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getTrendingMovies } from "@/services/movieApi.ts";
 import type {
 	Movie
 } from "@/types/movie.ts";
@@ -8,6 +7,7 @@ import {
 	useTranslation
 } from "react-i18next";
 import { PATHS } from "@/app/routes/routes.ts";
+import { MovieService } from "@/services/mediaService.ts";
 
 export const TrendingSection = () =>
 	{
@@ -23,7 +23,7 @@ export const TrendingSection = () =>
 				{
 					setIsLoading(true);
 					try {
-						const data = await getTrendingMovies(timeWindow);
+						const data = await MovieService.getTrending(timeWindow);
 						setMovies(data.results);
 					} catch (error) {
 						console.error("Lỗi:", error);

@@ -3,11 +3,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getDetails } from "@/services/movieApi";
 import { User, Link as LinkIcon } from "lucide-react";
 import { FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
 import { PATHS } from "@/app/routes/routes.ts";
 import { Button } from "@/components/ui/button.tsx";
+import { PersonService } from "@/services/mediaService.ts";
 
 interface PersonDetails {
 	id: number;
@@ -73,11 +73,7 @@ export const ActorDetailPage = () => {
 		const fetchActorData = async () => {
 			setIsLoading(true);
 			try {
-				const data = await getDetails(
-						"person",
-						parseInt(actorId),
-						"&append_to_response=combined_credits,external_ids"
-				);
+				const data = await PersonService.getDetails(parseInt(actorId), "&append_to_response=combined_credits,external_ids");
 				setActor(data);
 			} catch (error) {
 				console.error("Lỗi tải thông tin diễn viên:", error);

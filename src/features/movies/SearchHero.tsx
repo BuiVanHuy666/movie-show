@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from "react";
-import { getNowPlayingMovies, getTrendingKeywords } from "@/services/movieApi";
 import { useTranslation } from "react-i18next";
 import { Search, TrendingUp, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/app/routes/routes.ts";
+import { MovieService, SearchService } from "@/services/mediaService.ts";
 
 export const SearchHero = () => {
 	const { t, i18n } = useTranslation();
@@ -21,7 +21,7 @@ export const SearchHero = () => {
 	useEffect(() => {
 		const fetchRandomBackdrop = async () => {
 			try {
-				const data = await getNowPlayingMovies(1);
+				const data = await MovieService.getNowPlaying();
 				const randomMovie = data.results[Math.floor(Math.random() * data.results.length)];
 
 				if (randomMovie.backdrop_path) {
@@ -47,7 +47,7 @@ export const SearchHero = () => {
 	const fetchTrendingSearches = async () => {
 		setIsLoadingTrending(true);
 		try {
-			const data = await getTrendingKeywords();
+			const data = await SearchService.getTrendingKeywords();
 			if (data && data.results) {
 				const parsedResults = data.results
 						.slice(0, 10)
@@ -80,9 +80,7 @@ export const SearchHero = () => {
 
 	const handleSelectTrendingItem = (keyword: string) => {
 		setSearchQuery(keyword);
-		console.log("Đã chọn gợi ý:", keyword);
-		setShowTrendingKeyWords(false); // Ẩn dropdown sau khi chọn
-		// Nếu có route tìm kiếm, bạn có thể gọi navigate() ở đây
+		setShowTrendingKeyWords(false);
 	};
 
 	return (
@@ -99,7 +97,6 @@ export const SearchHero = () => {
 						</>
 				)}
 
-				{/* Main Content */}
 				<div className="relative z-10 w-full container mx-auto px-6 md:px-12 flex flex-col justify-center">
 					<div className="text-white mb-10">
 						<h1 className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight">
@@ -119,7 +116,6 @@ export const SearchHero = () => {
 									onChange={(e) => setSearchQuery(e.target.value)}
 									onFocus={handleInputFocus}
 									placeholder={t("nav.search.placeholder")}
-									// Thêm bg-white ở đây để input luôn màu trắng
 									className="w-full h-12 md:h-14 bg-white rounded-full pl-6 pr-32 text-base md:text-lg text-zinc-900 outline-none shadow-lg placeholder:text-zinc-500 transition-all"
 							/>
 							<button
@@ -130,10 +126,8 @@ export const SearchHero = () => {
 							</button>
 						</form>
 
-						{/* Dropdown Trending Keywords */}
 						{showTrendingKeyWords && (
 								<div className="absolute top-full left-0 w-full mt-2 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-									{/* Tiêu đề Dropdown */}
 									<div className="flex items-center gap-2 px-6 py-3 bg-zinc-50 dark:bg-zinc-900/50 border-b border-zinc-200 dark:border-zinc-800">
 										<TrendingUp className="w-5 h-5 text-sky-500" />
 										<span className="font-semibold text-base text-zinc-900 dark:text-zinc-100 tracking-wide">
@@ -141,13 +135,12 @@ export const SearchHero = () => {
                                 </span>
 									</div>
 
-									{/* Trạng thái Load / Hiển thị List */}
 									{isLoadingTrending ? (
 											<div className="flex items-center justify-center p-6">
 												<Loader2 className="w-6 h-6 animate-spin text-zinc-500" />
 											</div>
 									) : (
-											<ul className="max-h-[300px] overflow-y-auto py-2 custom-scrollbar">
+											<ul className="max-h-75 overflow-y-auto py-2 custom-scrollbar">
 												{trendingList.length > 0 ? (
 														trendingList.map((item, index) => (
 																<li

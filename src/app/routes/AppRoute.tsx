@@ -4,10 +4,12 @@ import { PATHS } from "@/app/routes/routes.ts";
 import { HomePage } from "@/pages/HomePage.tsx";
 import { RootErrorBoundary } from "@/app/routes/RootErrorBoundary.tsx";
 import { DetailLayout } from "@/layouts/DetailLayout.tsx";
-import { MovieDetail } from "@/pages/MovieDetail.tsx";
+import { MovieDetailPage } from "@/pages/MovieDetailPage.tsx";
 import { SearchPage } from "@/pages/SearchPage.tsx";
 import { ActorDetailPage } from "@/pages/ActorDetailPage.tsx";
 import { TVShowsDetailPage } from "@/pages/TVShowsDetailPage.tsx";
+import { MediaListingLayout } from "@/layouts/MediaListingLayout.tsx";
+import { MovieCategoryPage } from "@/pages/movies/MovieCategoryPage.tsx";
 
 export const AppRoute = createBrowserRouter([
 	{
@@ -25,12 +27,34 @@ export const AppRoute = createBrowserRouter([
 		]
 	},
 	{
+		element: <MediaListingLayout/>,
+		errorElement: <RootErrorBoundary/>,
+		children: [
+			{
+				path: PATHS.MOVIES.POPULAR,
+				element: <MovieCategoryPage type="popular" />
+			},
+			{
+				path: PATHS.MOVIES.NOW_PLAYING,
+				element: <MovieCategoryPage type="now_playing" />
+			},
+			{
+				path: PATHS.MOVIES.UP_COMING,
+				element: <MovieCategoryPage type="upcoming" />
+			},
+			{
+				path: PATHS.MOVIES.TOP_RATED,
+				element: <MovieCategoryPage type="top_rated" />
+			}
+		]
+	},
+	{
 		element: <DetailLayout/>,
 		errorElement: <RootErrorBoundary />,
 		children: [
 			{
 				path: PATHS.MOVIES.DETAIL_PATH,
-				element: <MovieDetail/>
+				element: <MovieDetailPage/>
 			},
 			{
 				path: PATHS.ACTORS.DETAIL_PATH,

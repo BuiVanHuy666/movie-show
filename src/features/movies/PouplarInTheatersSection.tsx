@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import type { Movie } from "@/types/movie.ts";
-import { getNowPlayingMovies } from "@/services/movieApi.ts";
 import { PATHS } from "@/app/routes/routes.ts";
+import { MovieService } from "@/services/mediaService.ts";
 
 export const PopularInTheatersSection = () =>
 	{
@@ -18,7 +18,7 @@ export const PopularInTheatersSection = () =>
 				{
 					setIsLoading(true);
 					try {
-						const data = await getNowPlayingMovies(1);
+						const data = await MovieService.getNowPlaying();
 						setMovies(data.results);
 					} catch (error) {
 						console.error("Lỗi lấy phim In Theaters:", error);
