@@ -149,7 +149,7 @@ export const Header = () => {
                             </NavigationMenuItem>
 
                             <NavigationMenuItem>
-                                <NavigationMenuLink href="/actors" className={navigationMenuTriggerStyle()}>
+                                <NavigationMenuLink href={PATHS.ACTORS.POPULAR} className={navigationMenuTriggerStyle()}>
                                     {t('nav.actors')}
                                 </NavigationMenuLink>
                             </NavigationMenuItem>

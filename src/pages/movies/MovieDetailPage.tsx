@@ -9,7 +9,7 @@ import { ScoreCircle } from "@/features/movies/components/ScoreCircle.tsx";
 import { ReviewsList } from "@/features/movies/components/ReviewList.tsx";
 import { CastList } from "@/features/movies/components/CastList.tsx";
 import { SimilarMoviesList } from "@/features/movies/components/SimilarMovieList.tsx";
-import { PATHS } from "@/app/routes/routes";
+import { PATHS } from "@/app/routes/routes.ts";
 
 export const MovieDetailPage = () => {
 	const { movieId } = useParams<{ movieId: string }>();

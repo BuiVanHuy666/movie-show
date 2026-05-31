@@ -65,7 +65,9 @@
 		"collection": "Part of the {{name}}",
 		"recommendations": "Recommendations",
 		"crew": "Crew",
-		"fetchError": "Failed to fetch movie information. Please try again."
+		"fetchError": "Failed to fetch movie information. Please try again.",
+		"minutes": "minutes",
+		"updating": "Updating"
 	},
 	"error": {
 		"goBack": "Go Back",
@@ -136,7 +138,22 @@
 		"recommendations": "Recommendations",
 		"playTrailer": "Play Trailer",
 		"contentRating": "Rating",
-		"noKeywords": "No keywords added"
+		"noKeywords": "No keywords added",
+		"inProduction": "In Production",
+		"seasonsCount": "Seasons",
+		"episodesCountInfo": "Episodes",
+		"firstAirDate": "First Air Date",
+		"lastAirDate": "Last Air Date",
+		"productionCountries": "Production Countries",
+		"spokenLanguages": "Spoken Languages",
+		"production": "Production Companies",
+		"votes": "votes",
+		"creator": "Creator",
+		"lastEpisodeToAir": "Last Episode to Air",
+		"updatingInfo": "Updating...",
+		"nextEpisodeToAir": "Next Episode to Air",
+		"episodes": "episodes",
+		"seriesCrew": "Series Crew"
 	},
 	"movieFilter": {
 		"title": "Filters",
@@ -151,6 +168,9 @@
 		"minUserVotes": "Minimum User Votes",
 		"runtime": "Runtime",
 		"search": "Search"
+	},
+	"popularPeople": {
+		"title": "Popular People"
 	},
 	"showMore": "Show More",
 	"showLess": "Show Less"

@@ -4,13 +4,14 @@ import { PATHS } from "@/app/routes/routes.ts";
 import { HomePage } from "@/pages/HomePage.tsx";
 import { RootErrorBoundary } from "@/app/routes/RootErrorBoundary.tsx";
 import { DetailLayout } from "@/layouts/DetailLayout.tsx";
-import { MovieDetailPage } from "@/pages/MovieDetailPage.tsx";
+import { MovieDetailPage } from "@/pages/movies/MovieDetailPage.tsx";
 import { SearchPage } from "@/pages/SearchPage.tsx";
-import { ActorDetailPage } from "@/pages/ActorDetailPage.tsx";
-import { TVShowsDetailPage } from "@/pages/TVShowsDetailPage.tsx";
+import { ActorDetailPage } from "@/pages/persons/ActorDetailPage.tsx";
+import { TVShowsDetailPage } from "@/pages/tvShows/TVShowsDetailPage.tsx";
 import { MediaListingLayout } from "@/layouts/MediaListingLayout.tsx";
 import { MovieCategoryPage } from "@/pages/movies/MovieCategoryPage.tsx";
 import { TvShowCategoryPage } from "@/pages/tvShows/TvShowCategoryPage.tsx";
+import { PersonCategoryPage } from "@/pages/persons/PersonCategoryPage.tsx";
 
 export const AppRoute = createBrowserRouter([
 	{
@@ -24,6 +25,10 @@ export const AppRoute = createBrowserRouter([
 			{
 				path: PATHS.SEARCH_PATH,
 				element: <SearchPage/>
+			},
+			{
+				path: PATHS.ACTORS.POPULAR,
+				element: <PersonCategoryPage/>
 			}
 		]
 	},

@@ -62,7 +62,9 @@
 		"collection": "Thuộc bộ sưu tập {{name}}",
 		"recommendations": "Có thể bạn sẽ thích",
 		"crew": "Đội ngũ sản xuất",
-		"fetchError": "Không thể tải thông tin phim. Vui lòng thử lại."
+		"fetchError": "Không thể tải thông tin phim. Vui lòng thử lại.",
+		"minutes": "phút",
+		"updating": "Đang cập nhật"
 	},
 	"error": {
 		"goBack": "Quay lại",
@@ -133,7 +135,22 @@
 		"recommendations": "Có thể bạn sẽ thích",
 		"playTrailer": "Xem Trailer",
 		"contentRating": "Phân loại",
-		"noKeywords": "Chưa có từ khóa"
+		"noKeywords": "Chưa có từ khóa",
+		"inProduction": "Đang sản xuất",
+		"seasonsCount": "Số mùa",
+		"episodesCountInfo": "Số tập",
+		"firstAirDate": "Phát sóng lần đầu",
+		"lastAirDate": "Phát sóng gần nhất",
+		"productionCountries": "Quốc gia sản xuất",
+		"spokenLanguages": "Ngôn ngữ",
+		"production": "Công ty sản xuất",
+		"votes": "bình chọn",
+		"creator": "Nhà sáng tạo",
+		"lastEpisodeToAir": "Tập vừa phát sóng",
+		"updatingInfo": "Đang cập nhật...",
+		"nextEpisodeToAir": "Tập sắp tới",
+		"episodes": "tập",
+		"seriesCrew": "Đội ngũ sản xuất"
 	},
 	"movieFilter": {
 		"title": "Bộ lọc",
@@ -148,6 +165,9 @@
 		"minUserVotes": "Số lượt bình chọn tối thiểu",
 		"runtime": "Thời lượng (phút)",
 		"search": "Tìm kiếm"
+	},
+	"popularPeople": {
+		"title": "Nhân vật phổ biến"
 	},
 	"showMore": "Xem thêm",
 	"showLess": "Thu gọn"

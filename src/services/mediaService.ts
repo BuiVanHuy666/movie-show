@@ -1,7 +1,7 @@
 import api from "@/app/configs/api.ts";
 import type { MovieDetails, MoviesResponse } from "@/types/movie.ts";
 import type { TVDetails, TvShowsResponse } from "@/types/tvShow.ts";
-import type { PersonDetails } from "@/types/person.ts";
+import type {PersonDetails, PersonsResponse } from "@/types/person.ts";
 
 type MediaType = 'movie' | 'tv' | 'person';
 
@@ -44,5 +44,6 @@ export const TVService = {
 };
 
 export const PersonService = {
+	getPopular: (page?: number) => getMediaList<PersonsResponse>('person', 'popular', page),
 	getDetails: (id: number, params?: string) => getMediaDetails<PersonDetails>('person', id, params),
 };

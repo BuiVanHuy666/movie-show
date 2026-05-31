@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { PATHS } from "@/app/routes/routes";
+import { Card } from "@/components/ui/card.tsx";
+import { Badge } from "@/components/ui/badge.tsx";
+import { Skeleton } from "@/components/ui/skeleton.tsx";
+import { PATHS } from "@/app/routes/routes.ts";
 import {
 	Tv, Calendar, Star, Link as LinkIcon, User, PlayCircle,
 	Clock, MonitorPlay, Clapperboard, Languages, MapPin, Users

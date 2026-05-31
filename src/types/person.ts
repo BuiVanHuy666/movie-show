@@ -1,4 +1,18 @@
-import type { ExternalIds, BaseMedia } from "./common";
+import type { ExternalIds, BaseMedia, PaginatedResponse, BasePerson } from "./common";
+
+export interface KnownFor {
+	id: number;
+	media_type: 'movie' | 'tv';
+	title?: string;
+	name?: string;
+	poster_path: string | null;
+	backdrop_path: string | null;
+	overview: string;
+}
+
+export interface PopularPerson extends BasePerson {
+	known_for: KnownFor[];
+}
 
 export interface PersonDetails {
 	id: number;
@@ -44,3 +58,5 @@ export interface CrewCredit extends BaseCredit {
 	job: string;
 	department: string;
 }
+
+export type PersonsResponse = PaginatedResponse<PopularPerson>;

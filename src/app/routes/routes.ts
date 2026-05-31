@@ -11,6 +11,7 @@ export const PATHS = {
 	},
 
 	ACTORS: {
+		POPULAR: '/movie-show/actors',
 		DETAIL_PATH: '/movie-show/actor/:actorId',
 		DETAIL: (id: string | number) => `/movie-show/actor/${id}`,
 	},

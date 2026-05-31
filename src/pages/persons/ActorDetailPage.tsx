@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Card } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card } from "@/components/ui/card.tsx";
+import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { User, Link as LinkIcon } from "lucide-react";
 import { FaTwitter, FaInstagram, FaFacebook, FaYoutube, FaTiktok, FaImdb } from "react-icons/fa";
 import { PATHS } from "@/app/routes/routes.ts";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button.tsx";
 import { PersonService } from "@/services/mediaService.ts";
 import type { PersonDetails } from "@/types/person.ts";
 import { calculateAge } from "@/utils/personUtils.ts";
