@@ -1,7 +1,7 @@
-import type { Review } from "@/types/movie.ts";
 import { useTranslation } from "react-i18next";
 import { getAvatarUrl } from "@/utils/movieUtils.ts";
 import { Star } from "lucide-react";
+import type { Review } from "@/types/common.ts";
 
 export const ReviewsList = ({reviews}: { reviews: Review[]
 }) =>

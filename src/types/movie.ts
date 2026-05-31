@@ -63,4 +63,4 @@ export interface MovieDetails extends Omit<Movie, "genre_ids"> {
 	external_ids?: ExternalIds;
 }
 
-export type TMDBResponse = PaginatedResponse<Movie>;
+export type MoviesResponse = PaginatedResponse<Movie>;

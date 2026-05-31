@@ -10,6 +10,7 @@ import { ActorDetailPage } from "@/pages/ActorDetailPage.tsx";
 import { TVShowsDetailPage } from "@/pages/TVShowsDetailPage.tsx";
 import { MediaListingLayout } from "@/layouts/MediaListingLayout.tsx";
 import { MovieCategoryPage } from "@/pages/movies/MovieCategoryPage.tsx";
+import { TvShowCategoryPage } from "@/pages/tvShows/TvShowCategoryPage.tsx";
 
 export const AppRoute = createBrowserRouter([
 	{
@@ -45,6 +46,18 @@ export const AppRoute = createBrowserRouter([
 			{
 				path: PATHS.MOVIES.TOP_RATED,
 				element: <MovieCategoryPage type="top_rated" />
+			},
+			{
+				path: PATHS.TV.POPULAR,
+				element: <TvShowCategoryPage type={"popular"} />
+			},
+			{
+				path: PATHS.TV.ON_THE_AIR,
+				element: <TvShowCategoryPage type={"on_the_air"} />
+			},
+			{
+				path: PATHS.TV.TOP_RATED,
+				element: <TvShowCategoryPage type={"top_rated"} />
 			}
 		]
 	},

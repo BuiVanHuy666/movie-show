@@ -21,7 +21,7 @@ export const MovieCategoryPage = ({ type }: { type: string }) => {
 			<>
 				<SideBarFilter type={type}/>
 				<div className="flex-1 w-full min-w-0">
-					<MediaGrid items={movies} type={"movie"} />
+					<MediaGrid items={movies} type="movie" />
 				</div>
 			</>
 	);

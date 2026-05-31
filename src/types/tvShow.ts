@@ -88,3 +88,5 @@ export interface TVDetails extends Omit<TvShow, "genre_ids"> {
 	similar?: PaginatedResponse<TvShow>;
 	content_ratings?: { results: { iso_3166_1: string; rating: string; descriptors: string[] }[] };
 }
+
+export type TvShowsResponse = PaginatedResponse<TvShow>;

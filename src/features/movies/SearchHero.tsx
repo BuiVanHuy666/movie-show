@@ -4,7 +4,7 @@ import { Search, TrendingUp, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/app/routes/routes.ts";
 import { MovieService } from "@/services/mediaService.ts";
-import { SearchService } from "@/services/SearchService.ts";
+import { useTrendingKeywords } from "@/hooks/useTrendingKeywords.ts";
 
 export const SearchHero = () => {
 	const { t, i18n } = useTranslation();
@@ -12,12 +12,14 @@ export const SearchHero = () => {
 
 	const [backgroundImage, setBackgroundImage] = useState<string>('');
 	const [searchQuery, setSearchQuery] = useState("");
-
 	const [showTrendingKeyWords, setShowTrendingKeyWords] = useState(false);
-	const [trendingList, setTrendingList] = useState<string[]>([]);
-	const [isLoadingTrending, setIsLoadingTrending] = useState(false);
 
 	const searchContainerRef = useRef<HTMLDivElement>(null);
+
+	const {
+		keywords: trendingList,
+		isLoading: isLoadingTrending
+	} = useTrendingKeywords("day", 10);
 
 	useEffect(() => {
 		const fetchRandomBackdrop = async () => {
@@ -29,7 +31,7 @@ export const SearchHero = () => {
 					setBackgroundImage(`https://image.tmdb.org/t/p/original${randomMovie.backdrop_path}`);
 				}
 			} catch (error) {
-				console.error("Lỗi lấy ảnh nền:", error);
+				console.error("Failed to fetch hero backdrop image:", error);
 			}
 		};
 		fetchRandomBackdrop();
@@ -45,29 +47,8 @@ export const SearchHero = () => {
 		return () => document.removeEventListener("mousedown", handleClickOutside);
 	}, []);
 
-	const fetchTrendingSearches = async () => {
-		setIsLoadingTrending(true);
-		try {
-			const data = await SearchService.getTrendingKeywords();
-			if (data && data.results) {
-				const parsedResults = data.results
-						.slice(0, 10)
-						.map((item: any) => item.title || item.name)
-						.filter(Boolean);
-				setTrendingList(parsedResults);
-			}
-		} catch (error) {
-			console.error("Lỗi khi lấy dữ liệu trending search:", error);
-		} finally {
-			setIsLoadingTrending(false);
-		}
-	};
-
 	const handleInputFocus = () => {
 		setShowTrendingKeyWords(true);
-		if (trendingList.length === 0) {
-			fetchTrendingSearches();
-		}
 	};
 
 	const handleSearch = (e: React.FormEvent) => {

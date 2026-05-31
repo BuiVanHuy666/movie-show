@@ -1,4 +1,4 @@
-import { Moon, Sun, Search, TrendingUp } from "lucide-react"
+import { Moon, Sun, Search, TrendingUp, Loader2 } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { useState, useEffect, useRef } from "react"
 import {
@@ -13,7 +13,7 @@ import {
 import { useTheme } from "@/app/providers/theme-provider.tsx"
 import { Link } from "react-router-dom";
 import { PATHS } from "@/app/routes/routes.ts";
-import { SearchService } from "@/services/SearchService.ts";
+import { useTrendingKeywords } from "@/hooks/useTrendingKeywords.ts";
 
 export const Header = () => {
     const { theme, setTheme } = useTheme()
@@ -21,37 +21,21 @@ export const Header = () => {
     const [searchKey, setSearchKey] = useState("")
 
     const [showTrending, setShowTrending] = useState(false)
-    const [trendingList, setTrendingList] = useState<string[]>([])
 
     const searchContainerRef = useRef<HTMLDivElement>(null)
+
+	const {
+		keywords: trendingList,
+		isLoading: isLoadingTrending
+	} = useTrendingKeywords("day", 10);
 
     const toggleLanguage = async () => {
         const newLang = i18n.language === "vi" ? "en" : "vi";
         await i18n.changeLanguage(newLang);
     };
 
-    const fetchTrendingSearches = async () => {
-        try {
-            const data = await SearchService.getTrendingKeywords();
-
-            if (data && data.results) {
-                const parsedResults = data.results
-                        .slice(0, 10)
-                        .map((item: any) => item.title || item.name)
-                        .filter(Boolean);
-
-                setTrendingList(parsedResults);
-            }
-        } catch (error) {
-            console.error("Lỗi khi lấy dữ liệu trending search:", error);
-        }
-    };
-
     const handleInputFocus = () => {
         setShowTrending(true);
-        if (trendingList.length === 0) {
-            fetchTrendingSearches();
-        }
     };
 
     useEffect(() => {
@@ -104,27 +88,39 @@ export const Header = () => {
                             </button>
                         </form>
 
-                        {showTrending && trendingList.length > 0 && (
-                                <div className="absolute top-full left-0 w-full mt-2 bg-white dark:bg-zinc-950 border border-border rounded-md shadow-2xl overflow-hidden z-50">
-                                    <div className="flex items-center gap-2 px-4 py-3 bg-zinc-50 dark:bg-zinc-900/50 border-b border-border">
-                                        <TrendingUp className="w-5 h-5 text-foreground font-bold" />
-                                        <span className="font-bold text-base text-foreground tracking-wide">Trending</span>
-                                    </div>
+	                    {showTrending && (
+			                    <div className="absolute top-full left-0 w-full mt-2 bg-white dark:bg-zinc-950 border border-border rounded-md shadow-2xl overflow-hidden z-50">
+				                    <div className="flex items-center gap-2 px-4 py-3 bg-zinc-50 dark:bg-zinc-900/50 border-b border-border">
+					                    <TrendingUp className="w-5 h-5 text-foreground font-bold" />
+					                    <span className="font-bold text-base text-foreground tracking-wide">Trending</span>
+				                    </div>
 
-                                    <ul className="max-h-[60vh] overflow-y-auto">
-                                        {trendingList.map((item, index) => (
-                                                <li
-                                                        key={index}
-                                                        onClick={() => handleSelectTrendingItem(item)}
-                                                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer border-b border-border/50 last:border-none transition-colors"
-                                                >
-                                                    <Search className="w-4 h-4 text-muted-foreground shrink-0" />
-                                                    <span className="text-sm text-foreground truncate">{item}</span>
-                                                </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                        )}
+				                    {isLoadingTrending ? (
+						                    <div className="flex items-center justify-center p-6">
+							                    <Loader2 className="w-6 h-6 animate-spin text-zinc-500" />
+						                    </div>
+				                    ) : (
+						                    <ul className="max-h-75 overflow-y-auto py-2 custom-scrollbar">
+							                    {trendingList.length > 0 ? (
+									                    trendingList.map((item, index) => (
+											                    <li
+													                    key={index}
+													                    onClick={() => handleSelectTrendingItem(item)}
+													                    className="flex items-center gap-4 px-6 py-3 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer transition-colors text-zinc-800 dark:text-zinc-200 border-b border-border/50 last:border-none"
+											                    >
+												                    <Search className="w-5 h-5 text-zinc-400 shrink-0" />
+												                    <span className="text-base truncate font-medium">{item}</span>
+											                    </li>
+									                    ))
+							                    ) : (
+									                    <li className="px-6 py-4 text-base text-zinc-500 text-center">
+										                    {t("movieDetails.noInfo")}
+									                    </li>
+							                    )}
+						                    </ul>
+				                    )}
+			                    </div>
+	                    )}
                     </div>
 
                     <NavigationMenu className="hidden lg:flex">
@@ -145,9 +141,9 @@ export const Header = () => {
                                 <NavigationMenuTrigger className="bg-transparent">{t('nav.tvShows')}</NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <ul className="grid w-55 gap-1 p-3">
-                                        <li><NavigationMenuLink href="/tv/popular" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.popular')}</NavigationMenuLink></li>
-                                        <li><NavigationMenuLink href="/tv/on-the-air" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.onTheAir')}</NavigationMenuLink></li>
-                                        <li><NavigationMenuLink href="/tv/top-rated" className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.topRated')}</NavigationMenuLink></li>
+                                        <Link to={PATHS.TV.POPULAR}><NavigationMenuLink className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.popular')}</NavigationMenuLink></Link>
+                                        <Link to={PATHS.TV.ON_THE_AIR}><NavigationMenuLink className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.onTheAir')}</NavigationMenuLink></Link>
+                                        <Link to={PATHS.TV.TOP_RATED}><NavigationMenuLink className="block p-2 text-sm font-medium rounded-md hover:bg-accent">{t('menu.topRated')}</NavigationMenuLink></Link>
                                     </ul>
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
