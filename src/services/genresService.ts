@@ -1,5 +1,5 @@
 import api from "@/app/configs/api.ts";
+import type { Genre } from "@/types/common.ts";
 
-type GenreType = 'movie' | 'tv';
 
-export const getGenres = (type: GenreType = 'movie') => api.get(`/genre/${type}/list`);
+export const getGenres = (type: string = 'movie') => api.get<Genre[]>(`/genre/${type}/list`);

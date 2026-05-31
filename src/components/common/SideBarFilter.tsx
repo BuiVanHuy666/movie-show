@@ -8,9 +8,9 @@ import { Slider } from "@/components/ui/slider.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
 import { Label } from "@/components/ui/label.tsx";
-import type { Genre } from "@/types/movie.ts";
 import { useTranslation } from "react-i18next";
-import { getGenres } from "@/services/GenresService.ts";
+import type { Genre } from "@/types/common.ts";
+import { getGenres } from "@/services/genresService.ts";
 
 const DEFAULT_FILTERS = {
 	allReleases: true,
@@ -41,13 +41,13 @@ export const SideBarFilter = ({type}: {type: string}) => {
 		const fetchGenres = async () => {
 			try {
 				const data = await getGenres(type);
-				setGenes(data.genres);
+				setGenes(data);
 			} catch (error) {
 				console.error("Error fetching genres:", error);
 			}
 		};
 		fetchGenres();
-	}, [i18n.language]);
+	}, [i18n.language, type]);
 
 	const isChanged =
 			selectedGenres.length > 0 ||

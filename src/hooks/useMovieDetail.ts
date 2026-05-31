@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import type { Cast, Crew, MovieDetails, Review, SimilarMovie, Movie } from "@/types/movie.ts";
+import type { Cast, Crew, MovieDetails, SimilarMovie, Movie } from "@/types/movie.ts";
 import { MovieService } from "@/services/mediaService.ts";
+import type { Review } from "@/types/common.ts";
 
 interface MovieDetailState {
 	movie: MovieDetails | null;

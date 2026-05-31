@@ -24,7 +24,7 @@ export const MovieService = {
 	getUpcoming: (page?: number) => getMediaList<MoviesResponse>('movie', 'upcoming', page),
 	getTopRated: (page?: number) => getMediaList<MoviesResponse>('movie', 'top_rated', page),
 	getDetails: (id: number, params?: string) => getMediaDetails<MovieDetails>('movie', id, params),
-	getTrending: (timeWindow?: "day" | "week") => getTrending('movie', timeWindow),
+	getTrending: (timeWindow?: "day" | "week") => getTrending<MoviesResponse>('movie', timeWindow),
 
 
 	getSimilar: (movieId: number, page?: number) => getMediaList<MoviesResponse>('movie', `${movieId}/similar`, page),
