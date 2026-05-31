@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Search, TrendingUp, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/app/routes/routes.ts";
-import { MovieService, SearchService } from "@/services/mediaService.ts";
+import { MovieService } from "@/services/mediaService.ts";
+import { SearchService } from "@/services/SearchService.ts";
 
 export const SearchHero = () => {
 	const { t, i18n } = useTranslation();

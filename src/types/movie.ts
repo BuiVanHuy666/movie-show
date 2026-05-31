@@ -1,107 +1,66 @@
-export type Genre = {
-    id: number;
-    name: string;
-};
+import type {
+	Genre, ProductionCompany, ProductionCountry, SpokenLanguage,
+	Video, Keyword, ExternalIds, PaginatedResponse, Review,
+	BasePerson, BaseMedia
+} from "./common";
 
-export type Movie = {
-    id: number;
-    title: string;
-    overview: string;
-    poster_path: string;
-    release_date: string;
-    vote_average: number;
-    backdrop_path: string | null;
-    tagline: string | null;
-    genres: Genre[];
-    runtime: number | null;
-    original_language: string;
-};
-
-export type TMDBResponse = {
-    page: number;
-    results: Movie[];
-    total_pages: number;
-    total_results: number;
-};
-
-export type Cast = {
-    id: number;
-    name: string;
-    character: string;
-    profile_path: string | null;
-};
-
-export type CreditsResponse = {
-    cast: Cast[];
-};
-
-export type Review = {
-    id: string;
-    author: string;
-    content: string;
-    created_at: string;
-    author_details: {
-        avatar_path: string | null;
-        rating: number | null;
-    };
-};
-
-export type ReviewsResponse = {
-    results: Review[];
-};
-
-
-export interface SimilarMovie {
+export interface BelongsToCollection {
 	id: number;
-	title: string;
-	backdrop_path: string | null;
+	name: string;
 	poster_path: string | null;
-	vote_average: number;
-}
-
-export interface Video {
-	id: string;
-	key: string;
-	name: string;
-	site: string;
-	type: string;
-}
-
-export interface ProductionCompany {
-	id: number;
-	logo_path: string | null;
-	name: string;
-}
-
-export interface Keyword {
-	id: number;
-	name: string;
-}
-
-export interface MovieDetails {
-	id: number;
-	title: string;
-	overview: string;
-	poster_path: string;
 	backdrop_path: string | null;
-	release_date: string;
-	vote_average: number;
-	runtime: number | null;
-	tagline: string | null;
-	status: string;
-	budget: number;
-	revenue: number;
-	original_title: string;
-	original_language: string;
-	genres: {
-		id: number;
-		name: string
-	}[];
-	production_companies: ProductionCompany[];
-	videos?: {
-		results: Video[];
-	};
-	keywords?: {
-		keywords: Keyword[];
-	};
 }
+
+export interface Cast extends BasePerson {
+	cast_id: number;
+	character: string;
+	credit_id: string;
+	order: number;
+}
+
+export interface Crew extends BasePerson {
+	credit_id: string;
+	department: string;
+	job: string;
+}
+
+export interface CreditsResponse {
+	cast: Cast[];
+	crew: Crew[];
+}
+
+export interface Movie extends BaseMedia {
+	title: string;
+	original_title?: string;
+	release_date: string;
+	adult?: boolean;
+	video?: boolean;
+	tagline?: string | null;
+}
+
+export type SimilarMovie = Pick<Movie, "id" | "title" | "backdrop_path" | "poster_path" | "vote_average">
+
+export interface MovieDetails extends Omit<Movie, "genre_ids"> {
+	belongs_to_collection: BelongsToCollection | null;
+	budget: number;
+	genres: Genre[];
+	homepage: string;
+	imdb_id: string | null;
+	origin_country: string[];
+	production_companies: ProductionCompany[];
+	production_countries: ProductionCountry[];
+	revenue: number;
+	runtime: number | null;
+	softcore?: boolean;
+	spoken_languages: SpokenLanguage[];
+	status: string;
+	similar?: PaginatedResponse<SimilarMovie>;
+	recommendations?: PaginatedResponse<Movie>;
+	videos?: { results: Video[] };
+	keywords?: { keywords: Keyword[] };
+	credits?: CreditsResponse;
+	reviews?: PaginatedResponse<Review>;
+	external_ids?: ExternalIds;
+}
+
+export type TMDBResponse = PaginatedResponse<Movie>;

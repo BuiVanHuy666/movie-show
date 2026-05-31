@@ -41,7 +41,7 @@
 		"overview": "Nội dung",
 		"topBilledCast": "Diễn viên chính",
 		"reviews": "Đánh giá",
-		"similarMovies": "Phim tương tự...",
+		"similarMovies": "Phim tương tự",
 		"playTrailer": "Xem Trailer",
 		"userScore": "Điểm",
 		"noInfo": "Chưa cập nhật",
@@ -55,7 +55,14 @@
 		"releaseDate": "Ngày phát hành",
 		"noImage": "Không có ảnh",
 		"reviewBy": "Đánh giá từ",
-		"notApplicable": "N/A"
+		"notApplicable": "N/A",
+		"productionCountries": "Quốc gia sản xuất",
+		"spokenLanguages": "Ngôn ngữ",
+		"productionCompanies": "Công ty sản xuất",
+		"collection": "Thuộc bộ sưu tập {{name}}",
+		"recommendations": "Có thể bạn sẽ thích",
+		"crew": "Đội ngũ sản xuất",
+		"fetchError": "Không thể tải thông tin phim. Vui lòng thử lại."
 	},
 	"error": {
 		"goBack": "Quay lại",

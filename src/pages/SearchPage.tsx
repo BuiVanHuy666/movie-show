@@ -25,6 +25,7 @@ export const SearchPage = () => {
 	const navigate = useNavigate();
 
 	const query = searchParams.get("query") || "";
+	const [prevQuery, setPrevQuery] = useState(query);
 	const [inputValue, setInputValue] = useState(query);
 	const [activeTab, setActiveTab] = useState<SearchType>("movie");
 	const [page, setPage] = useState(1);
@@ -34,9 +35,10 @@ export const SearchPage = () => {
 	const [counts, setCounts] = useState({ movie: 0, tv: 0, person: 0 });
 	const [isLoading, setIsLoading] = useState(false);
 
-	useEffect(() => {
+	if (query !== prevQuery) {
 		setInputValue(query);
-	}, [query]);
+		setPrevQuery(query);
+	}
 
 	useEffect(() => {
 		if (!query) return;
@@ -188,7 +190,6 @@ export const SearchPage = () => {
 
 											return (
 													<Card key={item.id} className="flex flex-row overflow-hidden hover:shadow-md hover:border-sky-500/50 transition-all duration-300 border-border group">
-														{/* Bọc Link cho Poster */}
 														<Link to={detailUrl} className="w-22.5 h-33.75 shrink-0 bg-muted flex items-center justify-center overflow-hidden block">
 															{imageUrl ? (
 																	<img src={imageUrl} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -198,7 +199,6 @@ export const SearchPage = () => {
 														</Link>
 
 														<div className="flex-1 p-4 flex flex-col justify-center min-w-0">
-															{/* Bọc Link cho Tiêu đề */}
 															<Link to={detailUrl} className="w-fit">
 																<h3 className="font-bold text-lg cursor-pointer transition-colors truncate group-hover:text-sky-500">
 																	{title}

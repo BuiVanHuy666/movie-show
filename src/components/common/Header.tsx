@@ -13,7 +13,7 @@ import {
 import { useTheme } from "@/app/providers/theme-provider.tsx"
 import { Link } from "react-router-dom";
 import { PATHS } from "@/app/routes/routes.ts";
-import { SearchService } from "@/services/mediaService.ts";
+import { SearchService } from "@/services/SearchService.ts";
 
 export const Header = () => {
     const { theme, setTheme } = useTheme()

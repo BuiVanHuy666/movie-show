@@ -1,15 +1,12 @@
-export interface CreatedBy {
-	id: number;
-	credit_id: string;
+import type {
+	Genre, ProductionCompany, ProductionCountry, SpokenLanguage,
+	Video, Keyword, ExternalIds, PaginatedResponse, BasePerson, BaseMedia
+} from "./common";
+
+export interface TvShow extends BaseMedia {
 	name: string;
 	original_name: string;
-	gender: number;
-	profile_path: string | null;
-}
-
-export interface Genre {
-	id: number;
-	name: string;
+	first_air_date: string;
 }
 
 export interface Episode {
@@ -28,25 +25,6 @@ export interface Episode {
 	still_path: string | null;
 }
 
-export interface Network {
-	id: number;
-	logo_path: string | null;
-	name: string;
-	origin_country: string;
-}
-
-export interface ProductionCompany {
-	id: number;
-	logo_path: string | null;
-	name: string;
-	origin_country: string;
-}
-
-export interface ProductionCountry {
-	iso_3166_1: string;
-	name: string;
-}
-
 export interface Season {
 	air_date: string | null;
 	episode_count: number;
@@ -58,60 +36,55 @@ export interface Season {
 	vote_average: number;
 }
 
-export interface SpokenLanguage {
-	english_name: string;
-	iso_639_1: string;
-	name: string;
+export interface AggregateCast extends BasePerson {
+	roles: {
+		credit_id: string;
+		character: string;
+		episode_count: number;
+	}[];
+	total_episode_count: number;
+	order: number;
 }
 
-export interface Video {
-	iso_639_1: string;
-	iso_3166_1: string;
-	name: string;
-	key: string;
-	site: string;
-	size: number;
-	type: string;
-	official: boolean;
-	id: string;
-	published_at: string;
+export interface AggregateCrew extends BasePerson {
+	jobs: {
+		credit_id: string;
+		job: string;
+		episode_count: number;
+	}[];
+	department: string;
+	total_episode_count: number;
 }
 
-export interface TVShowDetails {
+export interface TVDetails extends Omit<TvShow, "genre_ids"> {
 	adult: boolean;
-	backdrop_path: string | null;
-	created_by: CreatedBy[];
-	episode_run_time: number[];
-	first_air_date: string;
-	genres: Genre[];
-	homepage: string;
-	id: number;
 	in_production: boolean;
-	languages: string[];
+	homepage: string | null;
 	last_air_date: string;
-	last_episode_to_air: Episode | null;
-	name: string;
-	next_episode_to_air: Episode | null;
-	networks: Network[];
-	number_of_episodes: number;
-	number_of_seasons: number;
-	origin_country: string[];
-	original_language: string;
-	original_name: string;
-	overview: string;
-	popularity: number;
-	poster_path: string | null;
-	production_companies: ProductionCompany[];
-	production_countries: ProductionCountry[];
-	seasons: Season[];
-	softcore?: boolean;
-	spoken_languages: SpokenLanguage[];
 	status: string;
 	tagline: string;
 	type: string;
-	vote_average: number;
-	vote_count: number;
-	videos?: {
-		results: Video[];
+	number_of_episodes: number;
+	number_of_seasons: number;
+	episode_run_time: number[];
+	origin_country: string[];
+	genres: Genre[];
+	networks: ProductionCompany[];
+	production_companies: ProductionCompany[];
+	production_countries: ProductionCountry[];
+	spoken_languages: SpokenLanguage[];
+	created_by: BasePerson[] & { credit_id: string };
+	last_episode_to_air: Episode | null;
+	next_episode_to_air: Episode | null;
+	seasons: Season[];
+	aggregate_credits?: {
+		cast: AggregateCast[];
+		crew: AggregateCrew[];
 	};
+	external_ids?: ExternalIds;
+	videos?: { results: Video[] };
+	keywords?: { results: Keyword[] };
+	recommendations?: PaginatedResponse<TvShow>;
+	similar?: PaginatedResponse<TvShow>;
+	content_ratings?: { results: { iso_3166_1: string; rating: string; descriptors: string[] }[] };
 }

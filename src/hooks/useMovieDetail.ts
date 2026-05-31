@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react";
-import type { Cast, MovieDetails, Review, SimilarMovie } from "@/types/movie.ts";
+import type { Cast, Crew, MovieDetails, Review, SimilarMovie, Movie } from "@/types/movie.ts";
 import { MovieService } from "@/services/mediaService.ts";
 
 interface MovieDetailState {
 	movie: MovieDetails | null;
 	casts: Cast[];
+	crew: Crew[];
 	similar: SimilarMovie[];
+	recommendations: Movie[];
 	reviews: Review[];
 	isLoading: boolean;
-	error: string | null;
+	hasError: boolean;
 }
 
 const INITIAL_STATE: MovieDetailState = {
 	movie: null,
 	casts: [],
+	crew: [],
 	similar: [],
+	recommendations: [],
 	reviews: [],
 	isLoading: false,
-	error: null,
+	hasError: false,
 };
-
-interface CastsResponse { cast: Cast[] }
-interface PaginatedResponse<T> { results: T[] }
 
 export const useMovieDetail = (movieId: string | undefined, lang: string): MovieDetailState => {
 	const [state, setState] = useState<MovieDetailState>(INITIAL_STATE);
@@ -32,40 +33,27 @@ export const useMovieDetail = (movieId: string | undefined, lang: string): Movie
 		let cancelled = false;
 
 		const fetchData = async () => {
-			setState(prev => ({ ...prev, isLoading: true, error: null }));
-
+			setState(prev => ({ ...prev, isLoading: true, hasError: false }));
 			const id = parseInt(movieId, 10);
 
-			const [detailsRes, castsRes, similarRes, reviewsRes] = await Promise.allSettled([
-				MovieService.getDetails(id, '&append_to_response=videos,keywords'),
-				MovieService.getCasts(id),
-				MovieService.getSimilar(id),
-				MovieService.getReviews(id),
-			]);
+			try {
+				const data = await MovieService.getDetails(id, '&append_to_response=videos,keywords,credits,reviews,similar,external_ids,recommendations');
 
-			if (cancelled) return;
+				if (cancelled) return;
 
-			const movie = detailsRes.status === "fulfilled"
-					? (detailsRes.value as MovieDetails)
-					: null;
+				const casts = data.credits?.cast?.slice(0, 15) || [];
+				const crew = data.credits?.crew?.filter((c: { popularity: number; }) => c.popularity > 0.05).slice(0, 15) || [];
+				const similar = data.similar?.results?.slice(0, 10) || [];
+				const recommendations = data.recommendations?.results?.slice(0, 10) || [];
+				const reviews = data.reviews?.results?.slice(0, 5) || [];
 
-			const casts = castsRes.status === "fulfilled"
-					? (castsRes.value as CastsResponse).cast.slice(0, 15)
-					: [];
-
-			const similar = similarRes.status === "fulfilled"
-					? (similarRes.value as PaginatedResponse<SimilarMovie>).results.slice(0, 10)
-					: [];
-
-			const reviews = reviewsRes.status === "fulfilled"
-					? (reviewsRes.value as PaginatedResponse<Review>).results.slice(0, 5)
-					: [];
-
-			const error = detailsRes.status === "rejected"
-					? "Không thể tải thông tin phim. Vui lòng thử lại."
-					: null;
-
-			setState({ movie, casts, similar, reviews, isLoading: false, error });
+				setState({ movie: data, casts, crew, similar, recommendations, reviews, isLoading: false, hasError: false });
+			} catch (error) {
+				console.error("Failed to fetch movie details:", error);
+				if (!cancelled) {
+					setState(prev => ({ ...prev, isLoading: false, hasError: true }));
+				}
+			}
 		};
 
 		fetchData();

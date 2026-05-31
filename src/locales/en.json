@@ -44,7 +44,7 @@
 		"overview": "Overview",
 		"topBilledCast": "Top Billed Cast",
 		"reviews": "Reviews",
-		"similarMovies": "Similar Movies...",
+		"similarMovies": "Similar Movies",
 		"playTrailer": "Play Trailer",
 		"userScore": "Score",
 		"noInfo": "Not available",
@@ -58,7 +58,14 @@
 		"releaseDate": "Release Date",
 		"noImage": "No Image",
 		"reviewBy": "A review by",
-		"notApplicable": "N/A"
+		"notApplicable": "N/A",
+		"productionCountries": "Production Countries",
+		"spokenLanguages": "Spoken Languages",
+		"productionCompanies": "Production Companies",
+		"collection": "Part of the {{name}}",
+		"recommendations": "Recommendations",
+		"crew": "Crew",
+		"fetchError": "Failed to fetch movie information. Please try again."
 	},
 	"error": {
 		"goBack": "Go Back",
