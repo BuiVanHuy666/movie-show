@@ -22,7 +22,6 @@ interface MediaGridProps {
 export const MediaGrid = ({ items, type }: MediaGridProps) => {
 	const navigate = useNavigate();
 
-	// Hàm chuyển hướng động dựa vào type
 	const handleNavigate = (id: number) => {
 		if (type === "tv") {
 			navigate(PATHS.TV.DETAIL(id));
@@ -31,7 +30,6 @@ export const MediaGrid = ({ items, type }: MediaGridProps) => {
 		}
 	};
 
-	// Hàm format ngày tháng giống chuẩn TMDB (VD: Nov 29, 2026)
 	const formatDate = (dateString?: string) => {
 		if (!dateString) return "";
 		try {

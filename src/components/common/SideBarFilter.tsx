@@ -11,8 +11,10 @@ import { Label } from "@/components/ui/label.tsx";
 import { useTranslation } from "react-i18next";
 import type { Genre } from "@/types/common.ts";
 import { getGenres } from "@/services/genresService.ts";
+import type { FilterOptions } from "@/services/searchService.ts";
 
-const DEFAULT_FILTERS = {
+const DEFAULT_FILTERS: FilterOptions = {
+	genres: [],
 	allReleases: true,
 	fromDate: "",
 	toDate: "2026-11-29",
@@ -22,10 +24,14 @@ const DEFAULT_FILTERS = {
 	runtime: [0, 360],
 };
 
-export const SideBarFilter = ({type}: {type: string}) => {
-	const { t, i18n } = useTranslation();
-	const [genes, setGenes] = useState<Genre[]>([]);
+interface SideBarFilterProps {
+	type: "movie" | "tv";
+	onFilter: (filters: FilterOptions) => void;
+}
 
+export const SideBarFilter = ({ type, onFilter }: SideBarFilterProps) => {
+	const { t, i18n } = useTranslation();
+	const [genres, setGenres] = useState<Genre[]>([]);
 	const [isOpen, setIsOpen] = useState(true);
 
 	const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
@@ -41,7 +47,9 @@ export const SideBarFilter = ({type}: {type: string}) => {
 		const fetchGenres = async () => {
 			try {
 				const data = await getGenres(type);
-				setGenes(data);
+				if (data && data.genres) {
+					setGenres(data.genres);
+				}
 			} catch (error) {
 				console.error("Error fetching genres:", error);
 			}
@@ -65,6 +73,19 @@ export const SideBarFilter = ({type}: {type: string}) => {
 		);
 	};
 
+	const handleApplyFilter = () => {
+		onFilter({
+			genres: selectedGenres,
+			allReleases,
+			fromDate,
+			toDate,
+			language,
+			userScore,
+			minUserVotes,
+			runtime
+		});
+	};
+
 	return (
 			<div className="w-full md:w-65 shrink-0 bg-card rounded-xl border border-border shadow-sm overflow-hidden flex flex-col">
 				<button
@@ -77,6 +98,7 @@ export const SideBarFilter = ({type}: {type: string}) => {
 
 				{isOpen && (
 						<div className="flex flex-col animate-in fade-in duration-200">
+							{/* ... Toàn bộ nội dung filters của bạn giữ nguyên ... */}
 							<div className="p-4 space-y-3">
 								<span className="text-sm font-semibold text-foreground">{t("movieFilter.releaseDates")}</span>
 								<div className="flex items-center space-x-2">
@@ -89,24 +111,18 @@ export const SideBarFilter = ({type}: {type: string}) => {
 										{t("movieFilter.searchAllReleases")}
 									</Label>
 								</div>
-								<div className="grid grid-cols-[40px_1fr] items-center gap-2 pt-1">
-									<span className="text-xs text-muted-foreground">{t("movieFilter.from")}</span>
-									<Input
-											type="date"
-											className="h-8 text-xs"
-											value={fromDate}
-											onChange={(e) => setFromDate(e.target.value)}
-									/>
-								</div>
-								<div className="grid grid-cols-[40px_1fr] items-center gap-2">
-									<span className="text-xs text-muted-foreground">{t("movieFilter.to")}</span>
-									<Input
-											type="date"
-											className="h-8 text-xs"
-											value={toDate}
-											onChange={(e) => setToDate(e.target.value)}
-									/>
-								</div>
+								{!allReleases && (
+										<>
+											<div className="grid grid-cols-[40px_1fr] items-center gap-2 pt-1">
+												<span className="text-xs text-muted-foreground">{t("movieFilter.from")}</span>
+												<Input type="date" className="h-8 text-xs" value={fromDate} onChange={(e) => setFromDate(e.target.value)} />
+											</div>
+											<div className="grid grid-cols-[40px_1fr] items-center gap-2">
+												<span className="text-xs text-muted-foreground">{t("movieFilter.to")}</span>
+												<Input type="date" className="h-8 text-xs" value={toDate} onChange={(e) => setToDate(e.target.value)} />
+											</div>
+										</>
+								)}
 							</div>
 
 							<Separator />
@@ -114,7 +130,7 @@ export const SideBarFilter = ({type}: {type: string}) => {
 							<div className="p-4 space-y-3">
 								<span className="text-sm font-semibold text-foreground">{t("movieFilter.genres")}</span>
 								<div className="flex flex-wrap gap-2">
-									{genes.map(genre => {
+									{genres.map(genre => {
 										const isSelected = selectedGenres.includes(genre.id);
 										return (
 												<Badge
@@ -156,13 +172,7 @@ export const SideBarFilter = ({type}: {type: string}) => {
 							<div className="p-4 space-y-6">
 								<div className="space-y-3">
 									<span className="text-sm font-semibold text-foreground">{t("movieFilter.userScore")}</span>
-									<Slider
-											value={userScore}
-											onValueChange={setUserScore}
-											max={10}
-											step={1}
-											className="py-2"
-									/>
+									<Slider value={userScore} onValueChange={setUserScore} max={10} step={1} className="py-2" />
 									<div className="flex justify-between text-[10px] text-muted-foreground font-medium">
 										<span>0</span><span>5</span><span>10</span>
 									</div>
@@ -170,13 +180,7 @@ export const SideBarFilter = ({type}: {type: string}) => {
 
 								<div className="space-y-3">
 									<span className="text-sm font-semibold text-foreground">{t("movieFilter.minUserVotes")}</span>
-									<Slider
-											value={minUserVotes}
-											onValueChange={setMinUserVotes}
-											max={500}
-											step={50}
-											className="py-2"
-									/>
+									<Slider value={minUserVotes} onValueChange={setMinUserVotes} max={500} step={50} className="py-2" />
 									<div className="flex justify-between text-[10px] text-muted-foreground font-medium">
 										<span>0</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span>
 									</div>
@@ -184,13 +188,7 @@ export const SideBarFilter = ({type}: {type: string}) => {
 
 								<div className="space-y-3">
 									<span className="text-sm font-semibold text-foreground">{t("movieFilter.runtime")}</span>
-									<Slider
-											value={runtime}
-											onValueChange={setRuntime}
-											max={360}
-											step={15}
-											className="py-2"
-									/>
+									<Slider value={runtime} onValueChange={setRuntime} max={360} step={15} className="py-2" />
 									<div className="flex justify-between text-[10px] text-muted-foreground font-medium">
 										<span>0</span><span>120</span><span>240</span><span>360</span>
 									</div>
@@ -202,6 +200,7 @@ export const SideBarFilter = ({type}: {type: string}) => {
 				<div className="p-4 border-t border-border bg-card mt-auto">
 					<Button
 							disabled={!isChanged}
+							onClick={handleApplyFilter}
 							className={`w-full rounded-full font-bold h-10 shadow-none transition-all duration-200 ${
 									isChanged
 											? "bg-sky-500 hover:bg-sky-600 text-white cursor-pointer shadow-xs"

@@ -3,6 +3,10 @@ export interface Genre {
 	name: string;
 }
 
+export type GenreResponse = {
+	genres: Genre[];
+};
+
 export interface ProductionCompany {
 	id: number;
 	logo_path: string | null;
