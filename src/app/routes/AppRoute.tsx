@@ -12,76 +12,80 @@ import { MediaListingLayout } from "@/layouts/MediaListingLayout.tsx";
 import { MovieCategoryPage } from "@/pages/movies/MovieCategoryPage.tsx";
 import { TvShowCategoryPage } from "@/pages/tvShows/TvShowCategoryPage.tsx";
 import { PersonCategoryPage } from "@/pages/persons/PersonCategoryPage.tsx";
+import { MasterLayout } from "@/layouts/MasterLayout.tsx";
 
 export const AppRoute = createBrowserRouter([
 	{
-		element: <ClientLayout/>,
-		errorElement: <RootErrorBoundary/>,
-		children: [
-			{
-				path: PATHS.HOME,
-				element: <HomePage/>
-			},
-			{
-				path: PATHS.SEARCH_PATH,
-				element: <SearchPage/>
-			},
-			{
-				path: PATHS.ACTORS.POPULAR,
-				element: <PersonCategoryPage/>
-			}
-		]
-	},
-	{
-		element: <MediaListingLayout/>,
-		errorElement: <RootErrorBoundary/>,
-		children: [
-			{
-				path: PATHS.MOVIES.POPULAR,
-				element: <MovieCategoryPage type="popular" />
-			},
-			{
-				path: PATHS.MOVIES.NOW_PLAYING,
-				element: <MovieCategoryPage type="now_playing" />
-			},
-			{
-				path: PATHS.MOVIES.UP_COMING,
-				element: <MovieCategoryPage type="upcoming" />
-			},
-			{
-				path: PATHS.MOVIES.TOP_RATED,
-				element: <MovieCategoryPage type="top_rated" />
-			},
-			{
-				path: PATHS.TV.POPULAR,
-				element: <TvShowCategoryPage type={"popular"} />
-			},
-			{
-				path: PATHS.TV.ON_THE_AIR,
-				element: <TvShowCategoryPage type={"on_the_air"} />
-			},
-			{
-				path: PATHS.TV.TOP_RATED,
-				element: <TvShowCategoryPage type={"top_rated"} />
-			}
-		]
-	},
-	{
-		element: <DetailLayout/>,
+		element: <MasterLayout />,
 		errorElement: <RootErrorBoundary />,
 		children: [
 			{
-				path: PATHS.MOVIES.DETAIL_PATH,
-				element: <MovieDetailPage/>
+				element: <ClientLayout/>,
+				children: [
+					{
+						path: PATHS.HOME,
+						element: <HomePage/>
+					},
+					{
+						path: PATHS.SEARCH_PATH,
+						element: <SearchPage/>
+					},
+					{
+						path: PATHS.ACTORS.POPULAR,
+						element: <PersonCategoryPage/>
+					}
+				]
 			},
 			{
-				path: PATHS.ACTORS.DETAIL_PATH,
-				element: <ActorDetailPage/>
+				element: <MediaListingLayout/>,
+				children: [
+					{
+						path: PATHS.MOVIES.POPULAR,
+						element: <MovieCategoryPage type="popular" />
+					},
+					{
+						path: PATHS.MOVIES.NOW_PLAYING,
+						element: <MovieCategoryPage type="now_playing" />
+					},
+					{
+						path: PATHS.MOVIES.UP_COMING,
+						element: <MovieCategoryPage type="upcoming" />
+					},
+					{
+						path: PATHS.MOVIES.TOP_RATED,
+						element: <MovieCategoryPage type="top_rated" />
+					},
+					{
+						path: PATHS.TV.POPULAR,
+						element: <TvShowCategoryPage type={"popular"} />
+					},
+					{
+						path: PATHS.TV.ON_THE_AIR,
+						element: <TvShowCategoryPage type={"on_the_air"} />
+					},
+					{
+						path: PATHS.TV.TOP_RATED,
+						element: <TvShowCategoryPage type={"top_rated"} />
+					}
+				]
 			},
 			{
-				path: PATHS.TV.DETAIL_PATH,
-				element: <TVShowsDetailPage/>
+				element: <DetailLayout/>,
+				children: [
+					{
+						path: PATHS.MOVIES.DETAIL_PATH,
+						element: <MovieDetailPage/>
+					},
+					{
+						path: PATHS.ACTORS.DETAIL_PATH,
+						element: <ActorDetailPage/>
+					},
+					{
+						path: PATHS.TV.DETAIL_PATH,
+						element: <TVShowsDetailPage/>
+					}
+				]
 			}
 		]
 	}
-])
+]);

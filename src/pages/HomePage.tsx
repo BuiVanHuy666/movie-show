@@ -1,6 +1,6 @@
-import { TrendingSection } from "@/features/movies/TrendingSection.tsx";
-import { PopularInTheatersSection } from "@/features/movies/PouplarInTheatersSection.tsx";
-import { SearchHero } from "@/features/movies/SearchHero.tsx";
+import { TrendingSection } from "@/components/homepage/TrendingSection.tsx";
+import { PopularInTheatersSection } from "@/components/homepage/PouplarInTheatersSection.tsx";
+import { SearchHero } from "@/components/homepage/SearchHero.tsx";
 
 export const HomePage = () =>
 	{

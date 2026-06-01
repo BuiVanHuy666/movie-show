@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Movie } from "@/types/movie.ts";
-import { MediaGrid } from "@/components/common/MediaGrid.tsx";
+import { MediaGrid } from "@/components/common/media/MediaGrid.tsx";
 import { useTranslation } from "react-i18next";
 import { SideBarFilter } from "@/components/common/SideBarFilter.tsx";
 import { MovieService } from "@/services/mediaService.ts";

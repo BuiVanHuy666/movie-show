@@ -5,10 +5,11 @@ import App from './App.tsx'
 import './lib/i18n.ts'
 import { ThemeProvider } from "@/app/providers/theme-provider.tsx"
 
-createRoot(document.getElementById('root')!).render(
-		<StrictMode>
-			<ThemeProvider>
-				<App/>
-			</ThemeProvider>
-		</StrictMode>,
-)
+createRoot(document.getElementById('root')!)
+		.render(
+				<StrictMode>
+					<ThemeProvider>
+						<App/>
+					</ThemeProvider>
+				</StrictMode>,
+		)

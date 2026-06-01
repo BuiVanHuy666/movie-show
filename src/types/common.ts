@@ -3,6 +3,8 @@ export interface Genre {
 	name: string;
 }
 
+export type SearchType = "movie" | "tv" | "person";
+
 export type GenreResponse = {
 	genres: Genre[];
 };

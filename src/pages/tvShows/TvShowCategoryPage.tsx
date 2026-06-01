@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { TvShow } from "@/types/tvShow.ts";
-import { MediaGrid } from "@/components/common/MediaGrid.tsx";
+import { MediaGrid } from "@/components/common/media/MediaGrid.tsx";
 import { SideBarFilter } from "@/components/common/SideBarFilter.tsx";
 import { TVService } from "@/services/mediaService.ts";
 import { type FilterOptions, SearchService } from "@/services/searchService.ts";
@@ -14,9 +14,8 @@ export const TvShowCategoryPage = ({ type }: { type: string }) => {
 	useEffect(() => {
 		const fetchTVShows = async () => {
 			try {
-				const lang = i18n.language === "vi" ? "vi-VN" : "en-US";
 				if (filters) {
-					const data = await SearchService.discoverTVShows(filters, lang);
+					const data = await SearchService.discoverTVShows(filters);
 					setTVShows(data.results);
 				} else {
 					const data = await TVService.getTVShowsByType(type);
