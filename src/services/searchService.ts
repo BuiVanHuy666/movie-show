@@ -2,6 +2,7 @@ import api from "@/app/configs/api.ts";
 import type { TrendingKeywordsResponse } from "@/types/trendingKeywords.ts";
 import type { TvShowsResponse } from "@/types/tvShow.ts";
 import type { MoviesResponse } from "@/types/movie.ts";
+import type { PaginatedResponse, SearchType } from "@/types/common.ts";
 
 export interface FilterOptions {
 	genres: number[];
@@ -57,5 +58,12 @@ export const SearchService = {
 	discoverTVShows: (filters: FilterOptions): Promise<TvShowsResponse> => {
 		const queryString = buildDiscoverQueryString(filters, true);
 		return api.get(`/discover/tv?${queryString}`);
-	}
+	},
+	searchByType: <T>(
+			type: SearchType,
+			query: string,
+			page: number = 1
+	): Promise<PaginatedResponse<T>> => {
+		return api.get(`/search/${type}`, `&query=${encodeURIComponent(query)}&page=${page}&include_adult=false`);
+	},
 };
