@@ -21,6 +21,7 @@ export const MovieCategoryPage = ({ type }: { type: string }) => {
 			default: return t("categories.movieList");
 		}
 	}, [type, t]);
+
 	useDocumentTitle(pageTitle);
 
 	useEffect(() => {
