@@ -28,8 +28,11 @@
 		"rights": "All rights reserved. Developed by Bui Van Huy."
 	},
 	"home": {
+		"trendingMovies": "Trending Movies",
 		"whatsPopular": "What's Popular",
 		"inTheaters": "In Theaters",
+		"popularTv": "Popular TV Shows",
+		"onTheAirTv": "On The Air TV Shows",
 		"welcome": "Welcome.",
 		"exploreText": "Millions of movies, TV shows and people to discover. Explore now."
 	},
@@ -169,9 +172,21 @@
 		"runtime": "Runtime",
 		"search": "Search"
 	},
+	"categories": {
+		"popularMovies": "Popular Movies",
+		"nowPlayingMovies": "Now Playing Movies",
+		"upcomingMovies": "Upcoming Movies",
+		"topRatedMovies": "Top Rated Movies",
+		"popularTv": "Popular TV Shows",
+		"onTheAirTv": "On The Air TV Shows",
+		"topRatedTv": "Top Rated TV Shows",
+		"movieList": "Movie List",
+		"tvList": "TV Show List"
+	},
 	"popularPeople": {
 		"title": "Popular People"
 	},
 	"showMore": "Show More",
-	"showLess": "Show Less"
+	"showLess": "Show Less",
+	"loadingTableTitle": "Loading..."
 }

@@ -37,7 +37,7 @@ export const TVService = {
 	getPopular: (page?: number) => getMediaList<TvShowsResponse>('tv', 'popular', page),
 	getOnTheAir: (page?: number) => getMediaList<TvShowsResponse>('tv', 'on_the_air', page),
 	getDetails: (id: number, params?: string) => getMediaDetails<TVDetails>('tv', id, params),
-	getTrending: (timeWindow?: "day" | "week") => getTrending('tv', timeWindow),
+	getTrending: (timeWindow?: "day" | "week") => getTrending<TvShowsResponse>('tv', timeWindow),
 
 	getSeasonDetails: (tvId: number, seasonNumber: number) => api.get(`/tv/${tvId}/season/${seasonNumber}`),
 	getEpisodeDetails: (tvId: number, seasonNumber: number, episodeNumber: number) => api.get(`/tv/${tvId}/season/${seasonNumber}/episode/${episodeNumber}`),

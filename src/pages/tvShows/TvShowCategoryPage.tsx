@@ -1,15 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import type { TvShow } from "@/types/tvShow.ts";
 import { MediaGrid } from "@/components/common/media/MediaGrid.tsx";
 import { SideBarFilter } from "@/components/common/SideBarFilter.tsx";
 import { TVService } from "@/services/mediaService.ts";
 import { type FilterOptions, SearchService } from "@/services/searchService.ts";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle.ts";
 
 export const TvShowCategoryPage = ({ type }: { type: string }) => {
 	const [tvShows, setTVShows] = useState<TvShow[]>([]);
 	const [filters, setFilters] = useState<FilterOptions | null>(null);
-	const { i18n } = useTranslation();
+	const { t, i18n } = useTranslation();
+
+	const pageTitle = useMemo(() => {
+		switch (type) {
+			case "popular": return t("categories.popularTv");
+			case "on_the_air": return t("categories.onTheAirTv");
+			case "top_rated": return t("categories.topRatedTv");
+			default: return t("categories.tvList");
+		}
+	}, [type, t]);
+
+	useDocumentTitle(pageTitle);
 
 	useEffect(() => {
 		const fetchTVShows = async () => {

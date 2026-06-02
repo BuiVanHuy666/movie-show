@@ -44,13 +44,11 @@ export const SearchPage = () => {
 			try {
 				const currentLang = i18n.language;
 
-				// 1. Gọi API bằng Service, code cực sạch
 				const activeRes = await SearchService.searchByType<SearchItemData>(activeTab, query, page);
 
 				setResults(activeRes.results || []);
 				setTotalPages(activeRes.total_pages || 1);
 
-				// 2. Chỉ tính toán lại tab counts nếu query hoặc ngôn ngữ đổi
 				if (query !== lastFetchedQuery.current || currentLang !== lastFetchedLang.current) {
 					const types: SearchType[] = ["movie", "tv", "person"];
 

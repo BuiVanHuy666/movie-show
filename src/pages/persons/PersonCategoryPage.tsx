@@ -8,10 +8,12 @@ import { User as UserIcon } from "lucide-react";
 import { PATHS } from "@/app/routes/routes";
 import { PersonService } from "@/services/mediaService.ts";
 import type { PopularPerson } from "@/types/person.ts";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle.ts";
 
 export const PersonCategoryPage = () => {
 	const { t, i18n } = useTranslation();
 	const navigate = useNavigate();
+	useDocumentTitle(t("popularPeople.title", "Popular People"));
 
 	const [people, setPeople] = useState<PopularPerson[]>([]);
 	const [page, setPage] = useState(1);

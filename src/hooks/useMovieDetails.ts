@@ -25,7 +25,7 @@ const INITIAL_STATE: MovieDetailState = {
 	hasError: false,
 };
 
-export const useMovieDetail = (movieId: string | undefined, lang: string): MovieDetailState => {
+export const useMovieDetails = (movieId: string | undefined, lang: string): MovieDetailState => {
 	const [state, setState] = useState<MovieDetailState>(INITIAL_STATE);
 
 	useEffect(() => {

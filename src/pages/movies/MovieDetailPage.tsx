@@ -1,17 +1,19 @@
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useMovieDetail } from "@/hooks/useMovieDetail.ts";
+import { useMovieDetails } from "@/hooks/useMovieDetails.ts";
 import { ReviewsList } from "@/components/movie/details/ReviewList.tsx";
 import { SimilarMoviesList } from "@/components/movie/details/SimilarMovieList.tsx";
 import { Hero } from "@/components/movie/details/Hero.tsx";
 import { Sidebar } from "@/components/movie/details/SideBar.tsx";
 import { MediaPersonList } from "@/components/common/media/MediaPersonList.tsx";
 import { MediaList } from "@/components/common/media/MediaList.tsx";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle.ts";
 
 export const MovieDetailPage = () =>
 	{
 		const {movieId} = useParams<{ movieId: string }>();
+
 		const {t, i18n} = useTranslation();
 
 		const {
@@ -23,9 +25,13 @@ export const MovieDetailPage = () =>
 			reviews,
 			isLoading,
 			hasError
-		} = useMovieDetail(movieId, i18n.language);
+		} = useMovieDetails(movieId, i18n.language);
 
-		const trailerKey = useMemo(() => movie?.videos?.results?.find((v) => v.site === "YouTube" && v.type === "Trailer")?.key ?? null, [movie]);
+		useDocumentTitle(movie?.title || t("loadingTableTitle"));
+
+		const trailerKey = useMemo(() =>
+						movie?.videos?.results?.find((v) => v.site === "YouTube" && v.type === "Trailer")?.key ?? null,
+				[movie]);
 
 		if (isLoading) {
 			return (
@@ -59,8 +65,8 @@ export const MovieDetailPage = () =>
 						<Sidebar movie={movie}/>
 
 						<div className="flex-1 min-w-0 overflow-hidden flex flex-col gap-8">
-							<MediaPersonList title={t("movieDetails.topBilledCast")} data={casts} />
-							<MediaPersonList title={t("movieDetails.crew")} data={crew} />
+							<MediaPersonList title={t("movieDetails.topBilledCast")} data={casts}/>
+							<MediaPersonList title={t("movieDetails.crew")} data={crew}/>
 
 							<ReviewsList reviews={reviews}/>
 							<SimilarMoviesList movies={similar} currentMovieTitle={movie.title}/>

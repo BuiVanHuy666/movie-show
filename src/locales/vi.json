@@ -25,8 +25,11 @@
 		"rights": "Tất cả các quyền được bảo lưu. Phát triển bởi Bui Van Huy."
 	},
 	"home": {
+		"trendingMovies": "Phim Đang Thịnh Hành",
 		"whatsPopular": "Phổ biến nhất",
 		"inTheaters": "Tại rạp",
+		"popularTv": "TV Show Phổ Biến",
+		"onTheAirTv": "TV Show Đang Phát Sóng",
 		"welcome": "Xin chào.",
 		"exploreText": "Hàng triệu bộ phim, chương trình truyền hình và nhân vật để khám phá. Khám phá ngay."
 	},
@@ -166,9 +169,21 @@
 		"runtime": "Thời lượng (phút)",
 		"search": "Tìm kiếm"
 	},
+	"categories": {
+		"popularMovies": "Phim phổ biến",
+		"nowPlayingMovies": "Phim đang chiếu",
+		"upcomingMovies": "Phim sắp chiếu",
+		"topRatedMovies": "Phim được đánh giá cao",
+		"popularTv": "TV Show phổ biến",
+		"onTheAirTv": "TV Show đang phát sóng",
+		"topRatedTv": "TV Show được đánh giá cao",
+		"movieList": "Danh sách Phim",
+		"tvList": "Danh sách TV Show"
+	},
 	"popularPeople": {
 		"title": "Nhân vật phổ biến"
 	},
 	"showMore": "Xem thêm",
-	"showLess": "Thu gọn"
+	"showLess": "Thu gọn",
+	"loadingTableTitle": "Đang tải..."
 }

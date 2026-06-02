@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { PATHS } from "@/app/routes/routes.ts";
 
 export const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -10,7 +11,7 @@ export const Footer = () => {
 
                     <div className="flex flex-col gap-3">
                         <span className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-400 bg-clip-text text-transparent w-fit">
-                            MovieShow
+                            The MovieShow
                         </span>
                         <p className="text-sm text-muted-foreground leading-relaxed">
                             {t('footer.description')}
@@ -23,22 +24,22 @@ export const Footer = () => {
                         </h4>
                         <ul className="space-y-2 text-sm">
                             <li>
-                                <a href="/movies/popular" className="text-muted-foreground hover:text-foreground transition-colors">
+                                <a href={PATHS.MOVIES.POPULAR} className="text-muted-foreground hover:text-foreground transition-colors">
                                     {t('menu.popular')}
                                 </a>
                             </li>
                             <li>
-                                <a href="/movies/now-playing" className="text-muted-foreground hover:text-foreground transition-colors">
+                                <a href={PATHS.MOVIES.NOW_PLAYING} className="text-muted-foreground hover:text-foreground transition-colors">
                                     {t('menu.nowPlaying')}
                                 </a>
                             </li>
                             <li>
-                                <a href="/movies/upcoming" className="text-muted-foreground hover:text-foreground transition-colors">
+                                <a href={PATHS.MOVIES.UP_COMING} className="text-muted-foreground hover:text-foreground transition-colors">
                                     {t('menu.upcoming')}
                                 </a>
                             </li>
                             <li>
-                                <a href="/movies/top-rated" className="text-muted-foreground hover:text-foreground transition-colors">
+                                <a href={PATHS.MOVIES.TOP_RATED} className="text-muted-foreground hover:text-foreground transition-colors">
                                     {t('menu.topRated')}
                                 </a>
                             </li>
@@ -51,17 +52,17 @@ export const Footer = () => {
                         </h4>
                         <ul className="space-y-2 text-sm">
                             <li>
-                                <a href="/tv/popular" className="text-muted-foreground hover:text-foreground transition-colors">
+                                <a href={PATHS.TV.POPULAR} className="text-muted-foreground hover:text-foreground transition-colors">
                                     {t('menu.popular')}
                                 </a>
                             </li>
                             <li>
-                                <a href="/tv/on-the-air" className="text-muted-foreground hover:text-foreground transition-colors">
+                                <a href={PATHS.TV.ON_THE_AIR} className="text-muted-foreground hover:text-foreground transition-colors">
                                     {t('menu.onTheAir')}
                                 </a>
                             </li>
                             <li>
-                                <a href="/tv/top-rated" className="text-muted-foreground hover:text-foreground transition-colors">
+                                <a href={PATHS.TV.TOP_RATED} className="text-muted-foreground hover:text-foreground transition-colors">
                                     {t('menu.topRated')}
                                 </a>
                             </li>
@@ -96,7 +97,7 @@ export const Footer = () => {
                 <div className="border-t py-6 border-border/40">
                     <div className="container px-4 mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
                         <p className="text-xs text-muted-foreground">
-                            &copy; {currentYear} MovieShow. {t('footer.rights')}
+                            &copy; {currentYear} The MovieShow. {t('footer.rights')}
                         </p>
 
                         <div className="flex items-center gap-4 text-xs text-muted-foreground">

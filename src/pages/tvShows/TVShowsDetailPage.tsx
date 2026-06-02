@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
-import { TVService } from "@/services/mediaService.ts";
-import type { TVDetails } from "@/types/tvShow.ts";
 import { MediaPersonList } from "@/components/common/media/MediaPersonList.tsx";
 import { MediaList } from "@/components/common/media/MediaList.tsx";
 import { TVSidebar } from "@/components/tvShow/details/SideBar.tsx";
@@ -11,33 +8,16 @@ import { LatestEpisodes } from "@/components/tvShow/details/LatestEpisodes.tsx";
 import { Hero } from "@/components/tvShow/details/Hero.tsx";
 import { SeasonsList } from "@/components/tvShow/details/SeasonList.tsx";
 
+import { useDocumentTitle } from "@/hooks/useDocumentTitle.ts";
+import { useTvShowDetails } from "@/hooks/useTvShowDetails.ts";
+
 export const TVShowsDetailPage = () => {
 	const { tvId } = useParams<{ tvId: string }>();
 	const { t, i18n } = useTranslation();
 
-	const [tvShow, setTvShow] = useState<TVDetails | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const { tvShow, isLoading } = useTvShowDetails(tvId, i18n.language);
 
-	useEffect(() => {
-		if (!tvId) return;
-
-		const fetchTVData = async () => {
-			setIsLoading(true);
-			try {
-				const data = await TVService.getDetails(
-						parseInt(tvId),
-						"&append_to_response=aggregate_credits,external_ids,similar,recommendations,videos,keywords,content_ratings"
-				);
-				setTvShow(data);
-			} catch (error) {
-				console.error("Error when fetch TV show detail:", error);
-			} finally {
-				setIsLoading(false);
-			}
-		};
-
-		fetchTVData();
-	}, [tvId, i18n.language]);
+	useDocumentTitle(tvShow?.name || t("tvDetails.loadingTitle"), true);
 
 	if (isLoading) {
 		return (
