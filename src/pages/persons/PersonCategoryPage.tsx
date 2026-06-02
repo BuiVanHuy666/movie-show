@@ -3,16 +3,17 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, } from "@/components/ui/pagination";
 import { User as UserIcon } from "lucide-react";
 import { PATHS } from "@/app/routes/routes";
 import { PersonService } from "@/services/mediaService.ts";
 import type { PopularPerson } from "@/types/person.ts";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle.ts";
+import { CustomPagination } from "@/components/common/CustomPagination.tsx";
 
 export const PersonCategoryPage = () => {
 	const { t, i18n } = useTranslation();
 	const navigate = useNavigate();
+
 	useDocumentTitle(t("popularPeople.title", "Popular People"));
 
 	const [people, setPeople] = useState<PopularPerson[]>([]);
@@ -29,7 +30,7 @@ export const PersonCategoryPage = () => {
 				const data = await PersonService.getPopular(page);
 				if (isMounted && data) {
 					setPeople(data.results);
-					setTotalPages(data.total_pages);
+					setTotalPages(Math.min(data.total_pages || 1, 500)); // Giới hạn 500 trang theo TMDB
 				}
 			} catch (error) {
 				console.error("Failed to fetch popular people:", error);
@@ -40,6 +41,11 @@ export const PersonCategoryPage = () => {
 
 		fetchPopularPeople();
 
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+
 		return () => {
 			isMounted = false;
 		};
@@ -48,11 +54,13 @@ export const PersonCategoryPage = () => {
 	const renderSkeletons = () => (
 			<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
 				{Array.from({ length: 20 }).map((_, i) => (
-						<div key={i} className="flex flex-col gap-3">
-							<Skeleton className="w-full aspect-3/4 rounded-xl" />
-							<Skeleton className="h-5 w-3/4" />
-							<Skeleton className="h-4 w-full" />
-							<Skeleton className="h-4 w-2/3" />
+						<div key={i} className="flex flex-col border border-border rounded-xl overflow-hidden shadow-sm">
+							<Skeleton className="w-full aspect-3/4 rounded-none" />
+							<div className="p-4 flex flex-col gap-2">
+								<Skeleton className="h-4 w-3/4" />
+								<Skeleton className="h-3 w-full" />
+								<Skeleton className="h-3 w-2/3" />
+							</div>
 						</div>
 				))}
 			</div>
@@ -109,59 +117,8 @@ export const PersonCategoryPage = () => {
 									})}
 								</div>
 
-								{totalPages > 1 && (
-										<Pagination className="pt-12 pb-8">
-											<PaginationContent>
-												<PaginationItem>
-													<PaginationPrevious
-															text={t("pagination.previous")}
-															onClick={() => setPage((p) => Math.max(1, p - 1))}
-															className={page === 1 ? "opacity-50 pointer-events-none" : "cursor-pointer"}
-													/>
-												</PaginationItem>
-
-												{(() => {
-													const items = [];
-													let startPage = Math.max(1, page - 2);
-													let endPage = Math.min(totalPages, page + 2);
-
-													if (page <= 3) endPage = Math.min(totalPages, 5);
-													if (page >= totalPages - 2) startPage = Math.max(1, totalPages - 4);
-
-													for (let i = startPage; i <= endPage; i++) {
-														items.push(
-																<PaginationItem key={i}>
-																	<PaginationLink
-																			isActive={page === i}
-																			onClick={() => setPage(i)}
-																			className="cursor-pointer"
-																	>
-																		{i}
-																	</PaginationLink>
-																</PaginationItem>
-														);
-													}
-
-													if (endPage < totalPages) {
-														items.push(
-																<PaginationItem key="ellipsis">
-																	<PaginationEllipsis />
-																</PaginationItem>
-														);
-													}
-
-													return items;
-												})()}
-
-												<PaginationItem>
-													<PaginationNext
-															text={t("pagination.next")}
-															onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-															className={page >= totalPages ? "opacity-50 pointer-events-none" : "cursor-pointer"}
-													/>
-												</PaginationItem>
-											</PaginationContent>
-										</Pagination>
+								{!isLoading && (
+										<CustomPagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
 								)}
 							</>
 					)}
