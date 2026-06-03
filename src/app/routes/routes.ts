@@ -1,29 +1,29 @@
 export const PATHS = {
-	HOME: '/movie-show/',
+	HOME: '/',
 
 	MOVIES: {
-		POPULAR: '/movie-show/movies',
-		NOW_PLAYING: '/movie-show/movies/now-playing',
-		UP_COMING: '/movie-show/movies/upcoming',
-		TOP_RATED: '/movie-show/movies/top-rated',
-		DETAIL_PATH: '/movie-show/movie/:movieId',
-		DETAIL: (id: string | number) => `/movie-show/movie/${id}`,
+		POPULAR: '/movies',
+		NOW_PLAYING: '/movies/now-playing',
+		UP_COMING: '/movies/upcoming',
+		TOP_RATED: '/movies/top-rated',
+		DETAIL_PATH: '/movie/:movieId',
+		DETAIL: (id: string | number) => `/movie/${id}`,
 	},
 
 	ACTORS: {
-		POPULAR: '/movie-show/actors',
-		DETAIL_PATH: '/movie-show/actor/:actorId',
-		DETAIL: (id: string | number) => `/movie-show/actor/${id}`,
+		POPULAR: '/actors',
+		DETAIL_PATH: '/actor/:actorId',
+		DETAIL: (id: string | number) => `/actor/${id}`,
 	},
 
 	TV: {
-		POPULAR: '/movie-show/tv',
-		ON_THE_AIR: '/movie-show/tv/on-the-air',
-		TOP_RATED: '/movie-show/tv/top-rated',
-		DETAIL_PATH: '/movie-show/tv/:tvId',
-		DETAIL: (id: string | number) => `/movie-show/tv/${id}`,
+		POPULAR: '/tv',
+		ON_THE_AIR: '/tv/on-the-air',
+		TOP_RATED: '/tv/top-rated',
+		DETAIL_PATH: '/tv/:tvId',
+		DETAIL: (id: string | number) => `/tv/${id}`,
 	},
 
-	SEARCH_PATH: '/movie-show/search',
-	SEARCH: (keyword: string | number) => `/movie-show/search?query=${encodeURIComponent(keyword)}`,
+	SEARCH_PATH: '/search',
+	SEARCH: (keyword: string | number) => `/search?query=${encodeURIComponent(keyword)}`,
 }
