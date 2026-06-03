@@ -12,7 +12,6 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
-    base: "/movie-show/",
     plugins: [
         react(),
         tailwindcss(),
